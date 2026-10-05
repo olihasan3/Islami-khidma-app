@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -21,7 +20,6 @@ body{
     padding-bottom:80px;
 }
 
-/* HEADER */
 .header{
     background:linear-gradient(135deg,#056b3b,#0aa45f);
     color:white;
@@ -74,7 +72,6 @@ body{
     font-size:21px;
 }
 
-/* LOCATION */
 .location{
     margin-top:18px;
     display:flex;
@@ -83,7 +80,6 @@ body{
     font-size:13px;
 }
 
-/* SEARCH */
 .search{
     margin-top:15px;
     background:white;
@@ -107,7 +103,6 @@ body{
     color:#333;
 }
 
-/* BANNER */
 .banner{
     margin:18px 15px 0;
     padding:20px;
@@ -138,7 +133,6 @@ body{
     font-size:13px;
 }
 
-/* SECTION */
 .section{
     padding:0 15px;
     margin-top:23px;
@@ -160,7 +154,6 @@ body{
     font-size:12px;
 }
 
-/* SERVICE GRID */
 .services{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -197,7 +190,6 @@ body{
     margin-top:4px;
 }
 
-/* RIDE CARD */
 .ride-card{
     background:#087443;
     color:white;
@@ -227,7 +219,6 @@ body{
     font-weight:bold;
 }
 
-/* QUICK */
 .quick{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -256,7 +247,6 @@ body{
     color:#777;
 }
 
-/* BOTTOM NAV */
 .bottom-nav{
     position:fixed;
     bottom:0;
@@ -287,7 +277,58 @@ body{
     font-weight:bold;
 }
 
-/* MOBILE */
+/* RIDE FORM */
+#rideForm{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:200;
+    align-items:flex-end;
+}
+
+.ride-form-box{
+    background:white;
+    width:100%;
+    border-radius:25px 25px 0 0;
+    padding:22px;
+}
+
+.ride-form-box h2{
+    color:#087443;
+    margin-bottom:18px;
+}
+
+.ride-form-box input{
+    width:100%;
+    padding:14px;
+    margin-bottom:11px;
+    border:1px solid #dce6df;
+    border-radius:12px;
+    outline:none;
+    font-size:14px;
+}
+
+.send-ride{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#087443;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.close-ride{
+    width:100%;
+    padding:11px;
+    margin-top:8px;
+    border:none;
+    background:#eee;
+    border-radius:12px;
+}
+
 @media(max-width:350px){
 
     .services{
@@ -301,24 +342,19 @@ body{
     .service h4{
         font-size:11px;
     }
-
 }
 </style>
 </head>
 
-
 <body>
 
-<!-- HEADER -->
 <header class="header">
 
     <div class="top">
 
         <div class="logo">
 
-            <div class="logo-icon">
-                ☪
-            </div>
+            <div class="logo-icon">☪</div>
 
             <div>
                 <h2>ইসলামী খিদমাহ</h2>
@@ -327,17 +363,13 @@ body{
 
         </div>
 
-        <div class="notification">
-            🔔
-        </div>
+        <div class="notification">🔔</div>
 
     </div>
-
 
     <div class="location">
         📍 <span>আপনার বর্তমান অবস্থান</span>
     </div>
-
 
     <div class="search">
 
@@ -352,8 +384,6 @@ body{
 
 </header>
 
-
-<!-- WELCOME -->
 <section class="banner">
 
     <h2>আসসালামু আলাইকুম 🌿</h2>
@@ -369,8 +399,6 @@ body{
 
 </section>
 
-
-<!-- SERVICES -->
 <section class="section">
 
     <div class="section-title">
@@ -383,123 +411,66 @@ body{
 
     </div>
 
-
     <div class="services">
 
-
-        <div class="service"
-             onclick="openService('বাজার')">
-
-            <div class="icon">🛒</div>
-
-            <h4>বাজার</h4>
-
-            <p>ঘরে বাজার</p>
-
-        </div>
-
-
-        <div class="service"
-             onclick="openService('রাইড')">
-
+        <div class="service" onclick="openRideForm()">
             <div class="icon">🛺</div>
-
             <h4>রাইড</h4>
-
             <p>রিকশা / অটো</p>
-
         </div>
 
+        <div class="service" onclick="openService('বাজার')">
+            <div class="icon">🛒</div>
+            <h4>বাজার</h4>
+            <p>ঘরে বাজার</p>
+        </div>
 
-        <div class="service"
-             onclick="openService('খাবার')">
-
+        <div class="service" onclick="openService('খাবার')">
             <div class="icon">🍱</div>
-
             <h4>খাবার</h4>
-
             <p>ফুড ডেলিভারি</p>
-
         </div>
 
-
-        <div class="service"
-             onclick="openService('ওষুধ')">
-
+        <div class="service" onclick="openService('ওষুধ')">
             <div class="icon">💊</div>
-
             <h4>ওষুধ</h4>
-
             <p>মেডিসিন</p>
-
         </div>
 
-
-        <div class="service"
-             onclick="openService('ইলেকট্রিশিয়ান')">
-
+        <div class="service" onclick="openService('ইলেকট্রিশিয়ান')">
             <div class="icon">🔧</div>
-
             <h4>কারিগরি</h4>
-
             <p>ইলেকট্রিশিয়ান</p>
-
         </div>
 
-
-        <div class="service"
-             onclick="openService('কর্মী')">
-
+        <div class="service" onclick="openService('কর্মী')">
             <div class="icon">👷</div>
-
             <h4>কর্মী</h4>
-
             <p>কাজের লোক</p>
-
         </div>
 
-
-        <div class="service"
-             onclick="openService('গাড়ি')">
-
+        <div class="service" onclick="openService('গাড়ি')">
             <div class="icon">🚗</div>
-
             <h4>গাড়ি</h4>
-
             <p>রিজার্ভ</p>
-
         </div>
 
-
-        <div class="service"
-             onclick="openService('কেনাবেচা')">
-
+        <div class="service" onclick="openService('কেনাবেচা')">
             <div class="icon">🏪</div>
-
             <h4>কেনাবেচা</h4>
-
             <p>পণ্য</p>
-
         </div>
 
-
-        <div class="service"
-             onclick="openService('আরও সেবা')">
-
+        <div class="service" onclick="openService('আরও সেবা')">
             <div class="icon">➕</div>
-
             <h4>আরও সেবা</h4>
-
             <p>দেখুন</p>
-
         </div>
 
     </div>
 
 </section>
 
-
-<!-- RIDE -->
 <section class="section">
 
     <div class="ride-card">
@@ -514,7 +485,7 @@ body{
 
         <button
             class="ride-button"
-            onclick="openService('রাইড')">
+            onclick="openRideForm()">
 
             রাইড নিন →
 
@@ -524,19 +495,13 @@ body{
 
 </section>
 
-
-<!-- QUICK SERVICE -->
 <section class="section">
 
     <div class="section-title">
-
         <h3>দ্রুত সেবা</h3>
-
     </div>
 
-
     <div class="quick">
-
 
         <div class="quick-box"
              onclick="openService('জরুরি সেবা')">
@@ -549,7 +514,6 @@ body{
 
         </div>
 
-
         <div class="quick-box"
              onclick="openService('কাছাকাছি সেবা')">
 
@@ -561,72 +525,194 @@ body{
 
         </div>
 
-
     </div>
 
 </section>
 
-
-<!-- BOTTOM NAVIGATION -->
 <nav class="bottom-nav">
 
-
-    <div class="nav active"
-         onclick="goHome()">
-
+    <div class="nav active" onclick="goHome()">
         <div class="nav-icon">🏠</div>
-
         হোম
-
     </div>
 
-
-    <div class="nav"
-         onclick="openService('অর্ডার')">
-
+    <div class="nav" onclick="openService('অর্ডার')">
         <div class="nav-icon">📦</div>
-
         অর্ডার
-
     </div>
 
-
-    <div class="nav"
-         onclick="openService('সেবা')">
-
+    <div class="nav" onclick="openService('সেবা')">
         <div class="nav-icon">🛎️</div>
-
         সেবা
-
     </div>
 
-
-    <div class="nav"
-         onclick="openService('বার্তা')">
-
+    <div class="nav" onclick="openService('বার্তা')">
         <div class="nav-icon">💬</div>
-
         বার্তা
-
     </div>
 
-
-    <div class="nav"
-         onclick="openService('প্রোফাইল')">
-
+    <div class="nav" onclick="openService('প্রোফাইল')">
         <div class="nav-icon">👤</div>
-
         প্রোফাইল
-
     </div>
-
 
 </nav>
 
 
-<script>
+<!-- RIDE FORM -->
 
-function openService(service){
+<div id="rideForm">
+
+    <div class="ride-form-box">
+
+        <h2>🛺 রাইডের অনুরোধ</h2>
+
+        <input
+            id="pickup"
+            type="text"
+            placeholder="কোথা থেকে যাবেন?"
+        >
+
+        <input
+            id="destination"
+            type="text"
+            placeholder="কোথায় যাবেন?"
+        >
+
+        <input
+            id="fare"
+            type="number"
+            placeholder="আপনার প্রস্তাবিত ভাড়া"
+        >
+
+        <input
+            id="passengers"
+            type="number"
+            value="1"
+            min="1"
+            placeholder="যাত্রী সংখ্যা"
+        >
+
+        <button
+            class="send-ride"
+            onclick="sendRideRequest()">
+
+            🚕 রাইড খুঁজুন
+
+        </button>
+
+        <button
+            class="close-ride"
+            onclick="closeRideForm()">
+
+            বন্ধ করুন
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script type="module">
+
+import { db } from "./firebase.js";
+
+import {
+    collection,
+    addDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+window.openRideForm = function(){
+
+    document.getElementById("rideForm").style.display = "flex";
+
+};
+
+
+window.closeRideForm = function(){
+
+    document.getElementById("rideForm").style.display = "none";
+
+};
+
+
+window.sendRideRequest = async function(){
+
+    const pickup =
+        document.getElementById("pickup").value.trim();
+
+    const destination =
+        document.getElementById("destination").value.trim();
+
+    const fare =
+        document.getElementById("fare").value.trim();
+
+    const passengers =
+        document.getElementById("passengers").value.trim();
+
+
+    if(!pickup || !destination || !fare || !passengers){
+
+        alert("দয়া করে সব তথ্য পূরণ করুন।");
+
+        return;
+
+    }
+
+
+    try{
+
+        await addDoc(
+            collection(db,"rideRequests"),
+            {
+
+                pickup: pickup,
+
+                destination: destination,
+
+                proposedFare: Number(fare),
+
+                passengers: Number(passengers),
+
+                status: "waiting",
+
+                createdAt: serverTimestamp()
+
+            }
+        );
+
+
+        alert("✅ আপনার রাইডের অনুরোধ পাঠানো হয়েছে।");
+
+        document.getElementById("pickup").value = "";
+
+        document.getElementById("destination").value = "";
+
+        document.getElementById("fare").value = "";
+
+        document.getElementById("passengers").value = "1";
+
+        closeRideForm();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "❌ রিকোয়েস্ট পাঠানো যায়নি।\n\n" +
+            "Firebase সেটআপ বা Firestore Rules পরীক্ষা করুন।"
+        );
+
+    }
+
+};
+
+
+window.openService = function(service){
 
     alert(
         "ইসলামী খিদমাহ\n\n" +
@@ -634,19 +720,19 @@ function openService(service){
         " সেবা নির্বাচন করা হয়েছে।"
     );
 
-}
+};
 
-function goHome(){
+
+window.goHome = function(){
 
     window.scrollTo({
         top:0,
         behavior:"smooth"
     });
 
-}
+};
 
 </script>
 
 </body>
-</html>
-```
+    </html>
