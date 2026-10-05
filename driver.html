@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>চালক - ইসলামী Khidma</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7f5;
+}
+
+.header {
+  background: #087f3f;
+  color: white;
+  padding: 18px;
+  text-align: center;
+}
+
+.container {
+  padding: 15px;
+}
+
+.status {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.request {
+  background: white;
+  padding: 18px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.accept {
+  background: #087f3f;
+  color: white;
+}
+
+.call {
+  background: #eee;
+}
+
+.back {
+  background: #333;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h2>🛺 ইসলামী Khidma</h2>
+  <p>চালকের প্যানেল</p>
+</div>
+
+<div class="container">
+
+  <div class="status">
+    <h3>🟢 আপনি অনলাইনে</h3>
+    <p>কাছাকাছি রাইডের অফার এখানে দেখাবে</p>
+  </div>
+
+  <div class="request">
+
+    <h3>📍 নতুন রাইড অফার</h3>
+
+    <p><b>যাত্রী:</b> Khidma Customer</p>
+
+    <p><b>কোথা থেকে:</b> জয়পুরহাট</p>
+
+    <p><b>কোথায় যাবেন:</b> রেলস্টেশন</p>
+
+    <p><b>যাত্রী:</b> 1 জন</p>
+
+    <p><b>প্রস্তাবিত ভাড়া:</b> ৫০ টাকা</p>
+
+    <button class="call" onclick="callCustomer()">
+      📞 কথা বলুন
+    </button>
+
+    <button class="accept" onclick="acceptRide()">
+      ✅ রাইড গ্রহণ করুন
+    </button>
+
+  </div>
+
+  <button class="back" onclick="location.href='index.html'">
+    ← হোমে ফিরে যান
+  </button>
+
+</div>
+
+<script>
+
+function callCustomer() {
+  alert("📞 এখন যাত্রীর সাথে কথা বলার ব্যবস্থা হবে।");
+}
+
+function acceptRide() {
+  alert("✅ রাইড গ্রহণ করা হয়েছে!");
+}
+
+</script>
+
+</body>
+  </html>
