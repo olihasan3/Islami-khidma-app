@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>রিকশা/অটো - ইসলামী Khidma</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #f5f8f6;
+      font-family: Arial, sans-serif;
+      color: #173b2a;
+    }
+
+    .app {
+      max-width: 480px;
+      min-height: 100vh;
+      margin: auto;
+      background: white;
+    }
+
+    header {
+      background: #087f45;
+      color: white;
+      padding: 22px 18px;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    .box {
+      padding: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    .offer {
+      margin-top: 20px;
+      background: #087f45;
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .back {
+      margin-top: 15px;
+      background: #eee;
+      border: none;
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header>
+    <h2>🛺 রিকশা/অটো</h2>
+    <p>আপনার যাত্রার অফার দিন</p>
+  </header>
+
+  <div class="box">
+
+    <label>📍 কোথা থেকে যাবেন?</label>
+    <input id="pickup" type="text" placeholder="Pickup location">
+
+    <label>📍 কোথায় যাবেন?</label>
+    <input id="destination" type="text" placeholder="Destination">
+
+    <label>👥 যাত্রী সংখ্যা</label>
+    <select id="passengers">
+      <option>1 জন</option>
+      <option>2 জন</option>
+      <option>3 জন</option>
+      <option>4 জন</option>
+    </select>
+
+    <label>💰 আপনার প্রস্তাবিত ভাড়া</label>
+    <input id="fare" type="number" placeholder="যেমন: 50">
+
+    <button class="offer" onclick="sendOffer()">
+      রাইড অফার পাঠান
+    </button>
+
+    <button class="back" onclick="history.back()">
+      ← ফিরে যান
+    </button>
+
+  </div>
+
+</div>
+
+<script>
+function sendOffer() {
+
+  const pickup = document.getElementById("pickup").value;
+  const destination = document.getElementById("destination").value;
+  const fare = document.getElementById("fare").value;
+
+  if (!pickup || !destination || !fare) {
+    alert("দয়া করে Pickup, Destination এবং ভাড়া দিন।");
+    return;
+  }
+
+  alert(
+    "রাইড অফার তৈরি হয়েছে!\n\n" +
+    "Pickup: " + pickup +
+    "\nDestination: " + destination +
+    "\nপ্রস্তাবিত ভাড়া: ৳" + fare
+  );
+}
+</script>
+
+</body>
+  </html>
