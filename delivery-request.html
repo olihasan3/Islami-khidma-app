@@ -5,13 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ডেলিভারি নির্বাচন | ইসলামী খিদমাহ</title>
+<title>ডেলিভারি রিকোয়েস্ট | ইসলামী খিদমাহ</title>
 
 <style>
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
   font-family:Arial,"Noto Sans Bengali",sans-serif;
 }
 
@@ -21,11 +21,10 @@ body{
   padding-bottom:100px;
 }
 
-/* Header */
 .header{
   background:linear-gradient(135deg,#087443,#0b9256);
   color:white;
-  padding:18px 16px 23px;
+  padding:18px 16px 24px;
   border-radius:0 0 25px 25px;
 }
 
@@ -41,9 +40,9 @@ body{
   border-radius:50%;
   background:rgba(255,255,255,.16);
   display:flex;
-  justify-content:center;
   align-items:center;
-  font-size:27px;
+  justify-content:center;
+  font-size:28px;
   cursor:pointer;
 }
 
@@ -55,21 +54,19 @@ body{
 .subtitle{
   margin-top:13px;
   font-size:13px;
-  line-height:1.6;
+  line-height:1.7;
 }
 
-/* Container */
 .container{
   max-width:600px;
   margin:auto;
   padding:15px;
 }
 
-/* Card */
 .card{
   background:white;
   border-radius:18px;
-  padding:16px;
+  padding:17px;
   margin-bottom:15px;
   box-shadow:0 3px 12px rgba(0,0,0,.06);
 }
@@ -77,30 +74,34 @@ body{
 .card-title{
   font-size:17px;
   font-weight:bold;
-  margin-bottom:13px;
+  margin-bottom:14px;
 }
 
-/* Order Summary */
-.summary-line{
+.info{
   display:flex;
   justify-content:space-between;
-  padding:8px 0;
+  padding:10px 0;
   border-bottom:1px solid #edf1ee;
   font-size:14px;
 }
 
-.summary-line:last-child{
+.info:last-child{
   border-bottom:none;
 }
 
+.green{
+  color:#087443;
+  font-weight:bold;
+}
+
 /* Driver */
+
 .driver{
-  border:1px solid #e0e8e3;
+  border:1px solid #dfe8e2;
   border-radius:16px;
-  padding:13px;
-  margin-bottom:10px;
+  padding:14px;
+  margin-bottom:11px;
   cursor:pointer;
-  transition:.2s;
 }
 
 .driver.selected{
@@ -110,8 +111,8 @@ body{
 
 .driver-top{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
 }
 
 .driver-left{
@@ -120,9 +121,9 @@ body{
   gap:12px;
 }
 
-.driver-photo{
-  width:48px;
-  height:48px;
+.avatar{
+  width:50px;
+  height:50px;
   border-radius:50%;
   background:#e8f6ee;
   display:flex;
@@ -131,133 +132,146 @@ body{
   font-size:25px;
 }
 
-.driver-name{
-  font-size:15px;
+.name{
   font-weight:bold;
+  font-size:15px;
 }
 
 .vehicle{
-  font-size:12px;
   color:#777;
+  font-size:12px;
   margin-top:4px;
 }
 
-.online{
-  font-size:11px;
-  color:#087443;
-  font-weight:bold;
-}
-
-.driver-info{
-  display:flex;
-  justify-content:space-between;
-  margin-top:12px;
-  font-size:12px;
-  color:#666;
-}
-
 .check{
-  width:24px;
-  height:24px;
-  border-radius:50%;
+  width:25px;
+  height:25px;
   border:2px solid #ccd8d1;
+  border-radius:50%;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
+  color:transparent;
 }
 
 .driver.selected .check{
   background:#087443;
-  color:white;
   border-color:#087443;
+  color:white;
 }
 
-/* Auto matching */
-.auto-match{
+.driver-bottom{
+  display:flex;
+  justify-content:space-between;
+  margin-top:12px;
+  color:#777;
+  font-size:12px;
+}
+
+.online{
+  color:#087443;
+  font-weight:bold;
+}
+
+/* Automatic */
+
+.auto{
   background:#eef8f2;
   border-radius:14px;
-  padding:13px;
+  padding:14px;
+  margin-top:14px;
   display:flex;
   gap:10px;
-  align-items:flex-start;
-  margin-top:10px;
+  line-height:1.6;
+  font-size:13px;
 }
 
 .auto-icon{
-  font-size:22px;
-}
-
-.auto-text{
-  font-size:13px;
-  line-height:1.6;
-}
-
-.auto-text b{
-  color:#087443;
+  font-size:23px;
 }
 
 /* Time */
-select,
-input{
+
+select{
   width:100%;
   padding:13px;
   border:1px solid #dfe7e2;
   border-radius:12px;
-  outline:none;
   background:#fafcfb;
+  outline:none;
   font-size:14px;
 }
 
-/* Confirm */
-.confirm-btn{
+/* Request Button */
+
+.request-btn{
   width:100%;
+  padding:16px;
   border:none;
+  border-radius:14px;
   background:linear-gradient(135deg,#087443,#0b9256);
   color:white;
-  padding:16px;
-  border-radius:14px;
   font-size:16px;
   font-weight:bold;
   cursor:pointer;
-  box-shadow:0 5px 15px rgba(8,116,67,.22);
 }
 
-/* Status */
-.status{
+/* Searching */
+
+.searching{
   display:none;
   text-align:center;
-  padding:20px 10px;
 }
 
 .loader{
-  width:45px;
-  height:45px;
+  width:48px;
+  height:48px;
+  margin:5px auto 15px;
   border:4px solid #dcefe4;
-  border-top:4px solid #087443;
+  border-top-color:#087443;
   border-radius:50%;
   animation:spin 1s linear infinite;
-  margin:0 auto 14px;
 }
 
 @keyframes spin{
-  100%{
-    transform:rotate(360deg);
-  }
+  to{transform:rotate(360deg);}
 }
 
-.status-title{
-  font-size:17px;
+.success{
+  display:none;
+  text-align:center;
+}
+
+.success-icon{
+  font-size:50px;
+  margin-bottom:10px;
+}
+
+.success h2{
+  color:#087443;
+  font-size:19px;
+}
+
+.success p{
+  color:#777;
+  font-size:13px;
+  line-height:1.7;
+  margin-top:8px;
+}
+
+.home-btn{
+  margin-top:15px;
+  width:100%;
+  border:none;
+  background:#eef8f2;
+  color:#087443;
+  padding:13px;
+  border-radius:12px;
   font-weight:bold;
 }
 
-.status-text{
-  margin-top:7px;
-  font-size:13px;
-  color:#777;
-  line-height:1.6;
-}
-
 /* Bottom */
+
 .bottom{
   position:fixed;
   bottom:0;
@@ -271,30 +285,36 @@ input{
   box-shadow:0 -3px 15px rgba(0,0,0,.08);
 }
 
+.back-btn{
+  width:100%;
+  padding:12px;
+  border:none;
+  background:#eef8f2;
+  color:#087443;
+  border-radius:12px;
+  font-weight:bold;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-
 <header class="header">
 
   <div class="top">
 
-    <div class="back" onclick="goBack()">
-      ‹
-    </div>
+    <div class="back" onclick="goBack()">‹</div>
 
     <div class="title">
-      🚚 ডেলিভারি নির্বাচন
+      🚚 ডেলিভারি রিকোয়েস্ট
     </div>
 
   </div>
 
   <div class="subtitle">
-    আপনার বাজার পৌঁছে দেওয়ার জন্য একজন
-    ডেলিভারি কর্মী নির্বাচন করুন।
+    আপনার অর্ডার পৌঁছে দেওয়ার জন্য
+    একজন ডেলিভারি কর্মী নির্বাচন করুন।
   </div>
 
 </header>
@@ -303,25 +323,30 @@ input{
 <main class="container">
 
 
-<!-- ORDER SUMMARY -->
+<!-- ORDER -->
 
 <section class="card">
 
   <div class="card-title">
-    🛒 অর্ডারের সংক্ষিপ্ত তথ্য
+    🛒 অর্ডারের তথ্য
   </div>
 
-  <div class="summary-line">
+  <div class="info">
+    <span>অর্ডার</span>
+    <span class="green">বাজার</span>
+  </div>
+
+  <div class="info">
     <span>পণ্যের সংখ্যা</span>
-    <b id="itemCount">3 টি</b>
+    <span>৩টি</span>
   </div>
 
-  <div class="summary-line">
-    <span>আনুমানিক বাজার</span>
-    <b>৳ 1,500</b>
+  <div class="info">
+    <span>আনুমানিক মূল্য</span>
+    <span>৳ ১,৫০০</span>
   </div>
 
-  <div class="summary-line">
+  <div class="info">
     <span>ডেলিভারি ঠিকানা</span>
     <span>জয়পুরহাট</span>
   </div>
@@ -329,15 +354,15 @@ input{
 </section>
 
 
-<!-- DELIVERY TIME -->
+<!-- TIME -->
 
 <section class="card">
 
   <div class="card-title">
-    ⏰ ডেলিভারি সময়
+    ⏰ কখন পেতে চান?
   </div>
 
-  <select id="deliveryTime">
+  <select id="time">
 
     <option value="">
       সময় নির্বাচন করুন
@@ -364,195 +389,144 @@ input{
 </section>
 
 
-<!-- DRIVERS -->
+<!-- DRIVER -->
 
 <section class="card">
 
   <div class="card-title">
-    🚚 কাছাকাছি ডেলিভারি কর্মী
+    📍 কাছাকাছি ডেলিভারি কর্মী
   </div>
 
 
-  <!-- Driver 1 -->
-
   <div
     class="driver"
-    onclick="selectDriver(this,'Rahim')"
+    onclick="selectDriver(this,'রহিম')"
   >
 
     <div class="driver-top">
 
       <div class="driver-left">
 
-        <div class="driver-photo">
-          👨
-        </div>
+        <div class="avatar">👨</div>
 
         <div>
 
-          <div class="driver-name">
-            রহিম
-          </div>
+          <div class="name">রহিম</div>
 
           <div class="vehicle">
-            🛵 Delivery Bike
+            🛵 মোটরসাইকেল
           </div>
 
         </div>
 
       </div>
 
-      <div class="check">
-        ✓
-      </div>
+      <div class="check">✓</div>
 
     </div>
 
-    <div class="driver-info">
+    <div class="driver-bottom">
 
-      <span>
-        📍 0.8 km দূরে
-      </span>
+      <span>📍 ০.৮ কিমি</span>
 
-      <span class="online">
-        ● অনলাইনে
-      </span>
+      <span class="online">● অনলাইনে</span>
 
-      <span>
-        ⭐ 4.9
-      </span>
+      <span>⭐ ৪.৯</span>
 
     </div>
 
   </div>
 
 
-  <!-- Driver 2 -->
-
   <div
     class="driver"
-    onclick="selectDriver(this,'Karim')"
+    onclick="selectDriver(this,'করিম')"
   >
 
     <div class="driver-top">
 
       <div class="driver-left">
 
-        <div class="driver-photo">
-          👨
-        </div>
+        <div class="avatar">👨</div>
 
         <div>
 
-          <div class="driver-name">
-            করিম
-          </div>
+          <div class="name">করিম</div>
 
           <div class="vehicle">
-            🛺 Auto
+            🛺 অটো
           </div>
 
         </div>
 
       </div>
 
-      <div class="check">
-        ✓
-      </div>
+      <div class="check">✓</div>
 
     </div>
 
-    <div class="driver-info">
+    <div class="driver-bottom">
 
-      <span>
-        📍 1.2 km দূরে
-      </span>
+      <span>📍 ১.২ কিমি</span>
 
-      <span class="online">
-        ● অনলাইনে
-      </span>
+      <span class="online">● অনলাইনে</span>
 
-      <span>
-        ⭐ 4.8
-      </span>
+      <span>⭐ ৪.৮</span>
 
     </div>
 
   </div>
 
 
-  <!-- Driver 3 -->
-
   <div
     class="driver"
-    onclick="selectDriver(this,'Hasan')"
+    onclick="selectDriver(this,'হাসান')"
   >
 
     <div class="driver-top">
 
       <div class="driver-left">
 
-        <div class="driver-photo">
-          👨
-        </div>
+        <div class="avatar">👨</div>
 
         <div>
 
-          <div class="driver-name">
-            হাসান
-          </div>
+          <div class="name">হাসান</div>
 
           <div class="vehicle">
-            🚲 Bicycle
+            🚲 সাইকেল
           </div>
 
         </div>
 
       </div>
 
-      <div class="check">
-        ✓
-      </div>
+      <div class="check">✓</div>
 
     </div>
 
-    <div class="driver-info">
+    <div class="driver-bottom">
 
-      <span>
-        📍 1.5 km দূরে
-      </span>
+      <span>📍 ১.৫ কিমি</span>
 
-      <span class="online">
-        ● অনলাইনে
-      </span>
+      <span class="online">● অনলাইনে</span>
 
-      <span>
-        ⭐ 4.7
-      </span>
+      <span>⭐ ৪.৭</span>
 
     </div>
 
   </div>
 
 
-  <!-- Automatic Matching -->
+  <div class="auto">
 
-  <div class="auto-match">
+    <div class="auto-icon">🤖</div>
 
-    <div class="auto-icon">
-      🤖
-    </div>
-
-    <div class="auto-text">
-
-      <b>স্বয়ংক্রিয়ভাবে কর্মী নির্বাচন</b>
-
-      <br>
-
-      আপনি কাউকে নির্বাচন না করলে
-      ইসলামী খিদমাহ আপনার কাছাকাছি
-      উপযুক্ত কর্মীর কাছে Request পাঠাবে।
-
+    <div>
+      <b>স্বয়ংক্রিয় নির্বাচন</b><br>
+      কাউকে নির্বাচন না করলে কাছাকাছি
+      উপযুক্ত ডেলিভারি কর্মীর কাছে
+      Request পাঠানো হবে।
     </div>
 
   </div>
@@ -560,36 +534,54 @@ input{
 </section>
 
 
-<!-- STATUS -->
+<!-- SEARCHING -->
 
-<section
-  class="card status"
-  id="status"
->
+<section class="card searching" id="searching">
 
   <div class="loader"></div>
 
-  <div class="status-title">
-    ডেলিভারি কর্মী খোঁজা হচ্ছে...
-  </div>
+  <b>ডেলিভারি কর্মী খোঁজা হচ্ছে...</b>
 
-  <div class="status-text">
-    আপনার কাছাকাছি কর্মীদের কাছে
-    Request পাঠানো হচ্ছে।
-    <br>
-    যে কর্মী আগে গ্রহণ করবেন,
-    তার কাছে অর্ডারটি যাবে।
-  </div>
+  <p style="color:#777;font-size:13px;margin-top:8px;">
+    কাছাকাছি কর্মীদের কাছে Request পাঠানো হচ্ছে।
+  </p>
 
 </section>
 
 
-<!-- CONFIRM -->
+<!-- SUCCESS -->
 
-<section class="card">
+<section class="card success" id="success">
+
+  <div class="success-icon">
+    ✅
+  </div>
+
+  <h2>
+    Request পাঠানো হয়েছে
+  </h2>
+
+  <p id="successText">
+    একজন ডেলিভারি কর্মী Request গ্রহণ করলে
+    আপনাকে জানানো হবে।
+  </p>
 
   <button
-    class="confirm-btn"
+    class="home-btn"
+    onclick="goHome()"
+  >
+    🏠 Home Page
+  </button>
+
+</section>
+
+
+<!-- REQUEST -->
+
+<section class="card" id="requestCard">
+
+  <button
+    class="request-btn"
     onclick="sendRequest()"
   >
     🚚 ডেলিভারি Request পাঠান
@@ -604,18 +596,10 @@ input{
 <div class="bottom">
 
   <button
+    class="back-btn"
     onclick="goBack()"
-    style="
-      width:100%;
-      border:none;
-      background:#eef8f2;
-      color:#087443;
-      padding:12px;
-      border-radius:12px;
-      font-weight:bold;
-    "
   >
-    ← আগের পেজে ফিরে যান
+    ← বাজারের পেজে ফিরে যান
   </button>
 
 </div>
@@ -626,18 +610,17 @@ input{
 let selectedDriver = "";
 
 
-/* Select Driver */
+/* Driver Select */
 
 function selectDriver(element,name){
 
   document
     .querySelectorAll(".driver")
-    .forEach(function(driver){
+    .forEach(function(item){
 
-      driver.classList.remove("selected");
+      item.classList.remove("selected");
 
     });
-
 
   element.classList.add("selected");
 
@@ -651,8 +634,7 @@ function selectDriver(element,name){
 function sendRequest(){
 
   const time =
-    document.getElementById("deliveryTime").value;
-
+    document.getElementById("time").value;
 
   if(!time){
 
@@ -663,43 +645,54 @@ function sendRequest(){
   }
 
 
-  /*
-    Driver নির্বাচন না করলে
-    Automatic Matching চালু হবে।
-  */
+  document.getElementById("requestCard")
+    .style.display="none";
 
-  document.getElementById("status").style.display =
-    "block";
+  document.getElementById("searching")
+    .style.display="block";
 
 
-  document.getElementById("status")
+  document.getElementById("searching")
     .scrollIntoView({
       behavior:"smooth"
     });
 
 
+  /*
+    Demo matching delay.
+    বাস্তবে এখানে Backend/Database
+    থেকে Driver Request পাঠানো হবে।
+  */
+
   setTimeout(function(){
+
+    document.getElementById("searching")
+      .style.display="none";
+
+    document.getElementById("success")
+      .style.display="block";
+
 
     if(selectedDriver){
 
-      alert(
-        "✅ Request পাঠানো হয়েছে!\n\n" +
-        "ডেলিভারি কর্মী: " +
+      document.getElementById("successText")
+        .innerHTML =
+        "আপনার Request <b>" +
         selectedDriver +
-        "\n\n" +
-        "কর্মী Request গ্রহণ করলে আপনাকে Notification দেওয়া হবে।"
-      );
+        "</b>-এর কাছে পাঠানো হয়েছে।<br>" +
+        "তিনি গ্রহণ করলে আপনাকে Notification দেওয়া হবে।";
 
     }else{
 
-      alert(
-        "✅ Automatic Request চালু হয়েছে!\n\n" +
-        "কাছাকাছি ডেলিভারি কর্মীদের কাছে Request পাঠানো হচ্ছে।"
-      );
+      document.getElementById("successText")
+        .innerHTML =
+        "আপনার কাছাকাছি ডেলিভারি কর্মীদের কাছে " +
+        "Request পাঠানো হয়েছে।<br>" +
+        "যে কর্মী আগে গ্রহণ করবেন, অর্ডারটি তার কাছে যাবে।";
 
     }
 
-  },1500);
+  },2000);
 
 }
 
@@ -708,8 +701,16 @@ function sendRequest(){
 
 function goBack(){
 
-  window.location.href =
-    "grocery.html";
+  window.location.href="grocery.html";
+
+}
+
+
+/* Home */
+
+function goHome(){
+
+  window.location.href="index.html";
 
 }
 
@@ -718,4 +719,4 @@ function goBack(){
 </body>
 </html>
 ```
-  
+                             
