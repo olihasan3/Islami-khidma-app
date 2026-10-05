@@ -1,211 +1,389 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ইসলামী Khidma</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<title>ইসলামী খিদমাহ</title>
 
-    body {
-      background: #f5f8f6;
-      color: #173b2a;
-    }
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+}
 
-    .app {
-      max-width: 480px;
-      min-height: 100vh;
-      margin: auto;
-      background: white;
-      padding-bottom: 80px;
-    }
+body{
+    background:#f5f8f6;
+    color:#173b2b;
+}
 
-    header {
-      background: #087f45;
-      color: white;
-      padding: 22px 18px;
-      border-radius: 0 0 22px 22px;
-    }
+.header{
+    background:linear-gradient(135deg,#087443,#0b9b5a);
+    color:white;
+    padding:18px 16px 25px;
+    border-radius:0 0 25px 25px;
+}
 
-    .logo {
-      font-size: 25px;
-      font-weight: bold;
-    }
+.top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
 
-    .location {
-      margin-top: 8px;
-      font-size: 14px;
-    }
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
 
-    .search {
-      margin-top: 18px;
-      background: white;
-      color: #777;
-      padding: 14px;
-      border-radius: 12px;
-      font-size: 15px;
-    }
+.logo-icon{
+    width:45px;
+    height:45px;
+    background:white;
+    color:#087443;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+}
 
-    .title {
-      padding: 22px 18px 12px;
-      font-size: 20px;
-      font-weight: bold;
-    }
+.logo h2{
+    font-size:20px;
+}
 
-    .services {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      padding: 0 18px;
-    }
+.logo p{
+    font-size:12px;
+    opacity:.9;
+}
 
-    .service {
-      border: none;
-      background: #f1f7f3;
-      border-radius: 16px;
-      padding: 22px 10px;
-      font-size: 17px;
-      color: #145c3b;
-      box-shadow: 0 2px 7px rgba(0,0,0,0.06);
-      cursor: pointer;
-    }
+.notification{
+    background:rgba(255,255,255,.18);
+    padding:10px;
+    border-radius:12px;
+    font-size:20px;
+}
 
-    .service:active {
-      transform: scale(0.97);
-    }
+.search{
+    margin-top:18px;
+    background:white;
+    border-radius:14px;
+    padding:13px 15px;
+    color:#777;
+}
 
-    .icon {
-      display: block;
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
+.banner{
+    margin:18px 0;
+    background:#fff;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+}
 
-    .bottom {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 480px;
-      height: 68px;
-      background: white;
-      border-top: 1px solid #ddd;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-    }
+.banner h2{
+    color:#087443;
+    margin-bottom:8px;
+}
 
-    .nav {
-      text-align: center;
-      font-size: 13px;
-      color: #555;
-    }
+.banner p{
+    font-size:14px;
+    color:#555;
+    line-height:1.6;
+}
 
-    .nav.active {
-      color: #087f45;
-      font-weight: bold;
-    }
+.section{
+    padding:0 15px;
+    margin-top:22px;
+}
 
-    .nav-icon {
-      display: block;
-      font-size: 22px;
-      margin-bottom: 3px;
-    }
-  </style>
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+}
+
+.section-title h3{
+    font-size:18px;
+}
+
+.section-title span{
+    color:#087443;
+    font-size:13px;
+}
+
+.services{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.service{
+    background:white;
+    border-radius:15px;
+    padding:15px 7px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    border:1px solid #edf2ef;
+}
+
+.icon{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.service p{
+    font-size:12px;
+    color:#333;
+}
+
+.quick{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.quick-card{
+    background:white;
+    padding:16px;
+    border-radius:16px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.quick-card strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.quick-card small{
+    color:#777;
+}
+
+.ride{
+    margin-top:20px;
+    background:linear-gradient(135deg,#063e29,#087443);
+    color:white;
+    border-radius:18px;
+    padding:18px;
+}
+
+.ride h3{
+    margin-bottom:7px;
+}
+
+.ride button{
+    margin-top:12px;
+    border:0;
+    background:white;
+    color:#087443;
+    padding:10px 18px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.bottom{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:68px;
+    background:white;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    border-top:1px solid #ddd;
+    box-shadow:0 -3px 10px rgba(0,0,0,.08);
+}
+
+.nav{
+    text-align:center;
+    font-size:11px;
+    color:#777;
+}
+
+.nav.active{
+    color:#087443;
+    font-weight:bold;
+}
+
+.nav div{
+    font-size:22px;
+    margin-bottom:3px;
+}
+
+.content{
+    padding-bottom:85px;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="app">
+<div class="content">
 
-    <header>
-      <div class="logo">ইসলামী Khidma</div>
-      <div class="location">📍 জয়পুরহাট</div>
+<header class="header">
 
-      <div class="search">
-        🔍 কী প্রয়োজন? লিখুন
-      </div>
-    </header>
+<div class="top">
 
-    <div class="title">
-      আপনার প্রয়োজনীয় সেবা
-    </div>
+<div class="logo">
+<div class="logo-icon">☪</div>
+<div>
+<h2>ইসলামী খিদমাহ</h2>
+<p>সেবাই আমাদের অঙ্গীকার</p>
+</div>
+</div>
 
-    <div class="services">
+<div class="notification">🔔</div>
 
-      <button class="service" onclick="service('বাজার')">
-        <span class="icon">🛍️</span>
-        বাজার
-      </button>
-<button class="service" onclick="location.href='ride.html'">
-        <span class="icon">🛺</span>
-        রিকশা/অটো
-      </button>
+</div>
 
-      <button class="service" onclick="service('খাবার')">
-        <span class="icon">🍲</span>
-        খাবার
-      </button>
+<div class="search">
+🔍 &nbsp; আপনি কী সেবা খুঁজছেন?
+</div>
 
-      <button class="service" onclick="service('ওষুধ')">
-        <span class="icon">💊</span>
-        ওষুধ
-      </button>
+</header>
 
-      <button class="service" onclick="service('পার্সেল')">
-        <span class="icon">📦</span>
-        পার্সেল
-      </button>
 
-      <button class="service" onclick="service('কাজের লোক')">
-        <span class="icon">👷</span>
-        কাজের লোক
-      </button>
+<div class="section">
 
-      <button class="service" onclick="service('গাড়ি')">
-        <span class="icon">🚗</span>
-        গাড়ি
-      </button>
+<div class="banner">
+<h2>আসসালামু আলাইকুম 🌿</h2>
+<p>
+আপনার দৈনন্দিন প্রয়োজনের বিভিন্ন সেবা
+এখন এক জায়গায়। সহজে সেবা নিন, নিরাপদে ব্যবহার করুন।
+</p>
+</div>
 
-      <button class="service" onclick="service('দোকান')">
-        <span class="icon">🏪</span>
-        দোকান
-      </button>
+</div>
 
-    </div>
 
-  </div>
+<div class="section">
 
-  <div class="bottom">
+<div class="section-title">
+<h3>জনপ্রিয় সেবা</h3>
+<span>সব দেখুন ›</span>
+</div>
 
-    <div class="nav active">
-      <span class="nav-icon">🏠</span>
-      হোম
-    </div>
+<div class="services">
 
-    <div class="nav">
-      <span class="nav-icon">📋</span>
-      অর্ডার
-    </div>
+<div class="service">
+<div class="icon">🛒</div>
+<p>বাজার</p>
+</div>
 
-    <div class="nav">
-      <span class="nav-icon">👤</span>
-      আমি
-    </div>
+<div class="service">
+<div class="icon">🛺</div>
+<p>রিকশা/অটো</p>
+</div>
 
-  </div>
+<div class="service">
+<div class="icon">🚚</div>
+<p>ডেলিভারি</p>
+</div>
 
-  <script>
-    function service(name) {
-      alert(name + " সেবা নির্বাচন করা হয়েছে।");
-    }
-  </script>
+<div class="service">
+<div class="icon">💊</div>
+<p>মেডিসিন</p>
+</div>
+
+<div class="service">
+<div class="icon">🔧</div>
+<p>মিস্ত্রি</p>
+</div>
+
+<div class="service">
+<div class="icon">🏪</div>
+<p>দোকান</p>
+</div>
+
+</div>
+</div>
+
+
+<div class="section">
+
+<div class="section-title">
+<h3>দ্রুত সেবা</h3>
+</div>
+
+<div class="quick">
+
+<div class="quick-card">
+<strong>📦 অর্ডার করুন</strong>
+<small>বাজার বা পণ্য অর্ডার</small>
+</div>
+
+<div class="quick-card">
+<strong>🚕 রাইড নিন</strong>
+<small>কাছের রিকশা/অটো খুঁজুন</small>
+</div>
+
+<div class="quick-card">
+<strong>👨‍🔧 কর্মী খুঁজুন</strong>
+<small>বিশ্বস্ত সেবাদাতা</small>
+</div>
+
+<div class="quick-card">
+<strong>💳 পেমেন্ট</strong>
+<small>Cash ও Online Payment</small>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="ride">
+
+<h3>🛺 আপনার কাছের রিকশা/অটো</h3>
+
+<p>
+কাছাকাছি থাকা চালক খুঁজে নিয়ে
+আপনার সুবিধামতো রাইডের অনুরোধ করুন।
+</p>
+
+<button onclick="alert('রাইড সিস্টেম শীঘ্রই চালু হবে')">
+রাইড খুঁজুন
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<nav class="bottom">
+
+<div class="nav active">
+<div>🏠</div>
+হোম
+</div>
+
+<div class="nav">
+<div>📦</div>
+অর্ডার
+</div>
+
+<div class="nav">
+<div>🛺</div>
+রাইড
+</div>
+
+<div class="nav">
+<div>💳</div>
+পেমেন্ট
+</div>
+
+<div class="nav">
+<div>👤</div>
+প্রোফাইল
+</div>
+
+</nav>
 
 </body>
   </html>
