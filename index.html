@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ইসলামী Khidma</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f8f6;
+      color: #173b2a;
+    }
+
+    .app {
+      max-width: 480px;
+      min-height: 100vh;
+      margin: auto;
+      background: white;
+      padding-bottom: 80px;
+    }
+
+    header {
+      background: #087f45;
+      color: white;
+      padding: 22px 18px;
+      border-radius: 0 0 22px 22px;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .location {
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .search {
+      margin-top: 18px;
+      background: white;
+      color: #777;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 15px;
+    }
+
+    .title {
+      padding: 22px 18px 12px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      padding: 0 18px;
+    }
+
+    .service {
+      border: none;
+      background: #f1f7f3;
+      border-radius: 16px;
+      padding: 22px 10px;
+      font-size: 17px;
+      color: #145c3b;
+      box-shadow: 0 2px 7px rgba(0,0,0,0.06);
+      cursor: pointer;
+    }
+
+    .service:active {
+      transform: scale(0.97);
+    }
+
+    .icon {
+      display: block;
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .bottom {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      height: 68px;
+      background: white;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .nav {
+      text-align: center;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .nav.active {
+      color: #087f45;
+      font-weight: bold;
+    }
+
+    .nav-icon {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 3px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <header>
+      <div class="logo">ইসলামী Khidma</div>
+      <div class="location">📍 জয়পুরহাট</div>
+
+      <div class="search">
+        🔍 কী প্রয়োজন? লিখুন
+      </div>
+    </header>
+
+    <div class="title">
+      আপনার প্রয়োজনীয় সেবা
+    </div>
+
+    <div class="services">
+
+      <button class="service" onclick="service('বাজার')">
+        <span class="icon">🛍️</span>
+        বাজার
+      </button>
+
+      <button class="service" onclick="service('রিকশা/অটো')">
+        <span class="icon">🛺</span>
+        রিকশা/অটো
+      </button>
+
+      <button class="service" onclick="service('খাবার')">
+        <span class="icon">🍲</span>
+        খাবার
+      </button>
+
+      <button class="service" onclick="service('ওষুধ')">
+        <span class="icon">💊</span>
+        ওষুধ
+      </button>
+
+      <button class="service" onclick="service('পার্সেল')">
+        <span class="icon">📦</span>
+        পার্সেল
+      </button>
+
+      <button class="service" onclick="service('কাজের লোক')">
+        <span class="icon">👷</span>
+        কাজের লোক
+      </button>
+
+      <button class="service" onclick="service('গাড়ি')">
+        <span class="icon">🚗</span>
+        গাড়ি
+      </button>
+
+      <button class="service" onclick="service('দোকান')">
+        <span class="icon">🏪</span>
+        দোকান
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="bottom">
+
+    <div class="nav active">
+      <span class="nav-icon">🏠</span>
+      হোম
+    </div>
+
+    <div class="nav">
+      <span class="nav-icon">📋</span>
+      অর্ডার
+    </div>
+
+    <div class="nav">
+      <span class="nav-icon">👤</span>
+      আমি
+    </div>
+
+  </div>
+
+  <script>
+    function service(name) {
+      alert(name + " সেবা নির্বাচন করা হয়েছে।");
+    }
+  </script>
+
+</body>
+  </html>
