@@ -1,0 +1,390 @@
+```html
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>সেবাসমূহ | ইসলামী খিদমাহ</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, "Noto Sans Bengali", sans-serif;
+    }
+
+    body {
+      background: #f5f8f6;
+      color: #173b2b;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #087443, #0b9256);
+      color: white;
+      padding: 18px 16px 22px;
+      border-radius: 0 0 24px 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .back {
+      font-size: 25px;
+      cursor: pointer;
+      background: rgba(255,255,255,0.15);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .title {
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .help {
+      background: rgba(255,255,255,0.15);
+      padding: 9px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+
+    .subtitle {
+      margin-top: 16px;
+      font-size: 14px;
+      opacity: 0.95;
+      line-height: 1.6;
+    }
+
+    /* Search */
+    .search-box {
+      margin: 18px 15px;
+      background: white;
+      border-radius: 14px;
+      padding: 13px 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+    }
+
+    .search-box span {
+      font-size: 20px;
+    }
+
+    .search-box input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 15px;
+      background: transparent;
+    }
+
+    /* Section */
+    .section-title {
+      padding: 0 16px;
+      margin: 12px 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* Services Grid */
+    .services {
+      padding: 0 14px 90px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 13px;
+    }
+
+    .service {
+      background: white;
+      border-radius: 18px;
+      padding: 18px 12px;
+      text-align: center;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+      border: 1px solid #e8eee9;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    .service:active {
+      transform: scale(0.96);
+    }
+
+    .icon {
+      width: 58px;
+      height: 58px;
+      margin: auto;
+      border-radius: 17px;
+      background: #e8f6ee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 31px;
+    }
+
+    .service h3 {
+      margin-top: 11px;
+      font-size: 15px;
+      color: #123b2a;
+    }
+
+    .service p {
+      margin-top: 5px;
+      color: #777;
+      font-size: 11px;
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-width: 600px;
+      margin: auto;
+      height: 67px;
+      background: white;
+      border-top: 1px solid #e4e9e6;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 -3px 15px rgba(0,0,0,0.08);
+    }
+
+    .nav-item {
+      text-align: center;
+      font-size: 11px;
+      color: #777;
+      cursor: pointer;
+    }
+
+    .nav-item .nav-icon {
+      font-size: 21px;
+      margin-bottom: 3px;
+    }
+
+    .nav-item.active {
+      color: #07854b;
+      font-weight: bold;
+    }
+
+    @media (min-width: 600px) {
+      .services {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 600px;
+        margin: auto;
+      }
+
+      .header {
+        max-width: 600px;
+        margin: auto;
+      }
+
+      .search-box,
+      .section-title {
+        max-width: 570px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="top">
+      <div class="back" onclick="goHome()">‹</div>
+
+      <div class="title">ইসলামী খিদমাহ</div>
+
+      <div class="help">সহায়তা</div>
+    </div>
+
+    <div class="subtitle">
+      আপনার প্রয়োজনীয় সেবা সহজেই নির্বাচন করুন।
+      <br>
+      <b>খিদমাহ — মানুষের সেবায়।</b>
+    </div>
+  </header>
+
+  <!-- Search -->
+  <div class="search-box">
+    <span>🔍</span>
+    <input
+      type="text"
+      id="search"
+      placeholder="আপনি কোন সেবা খুঁজছেন?"
+      onkeyup="searchService()"
+    >
+  </div>
+
+  <div class="section-title">
+    সকল সেবা
+  </div>
+
+  <!-- Services -->
+  <div class="services" id="serviceList">
+
+    <div class="service" data-name="বাজার grocery" onclick="openService('grocery')">
+      <div class="icon">🛒</div>
+      <h3>বাজার / Grocery</h3>
+      <p>বাজারের পণ্য অর্ডার করুন</p>
+    </div>
+
+    <div class="service" data-name="ওষুধ medicine" onclick="openService('medicine')">
+      <div class="icon">💊</div>
+      <h3>ওষুধ</h3>
+      <p>প্রয়োজনীয় ওষুধ সংগ্রহ</p>
+    </div>
+
+    <div class="service" data-name="ইলেকট্রিশিয়ান electrician" onclick="openService('electrician')">
+      <div class="icon">🔧</div>
+      <h3>ইলেকট্রিশিয়ান</h3>
+      <p>দক্ষ কর্মী খুঁজুন</p>
+    </div>
+
+    <div class="service" data-name="নির্মাণ construction শ্রমিক" onclick="openService('construction')">
+      <div class="icon">🧱</div>
+      <h3>নির্মাণ শ্রমিক</h3>
+      <p>কাজের জন্য কর্মী নিন</p>
+    </div>
+
+    <div class="service" data-name="খাবার food delivery" onclick="openService('food')">
+      <div class="icon">🍱</div>
+      <h3>খাবার</h3>
+      <p>রেস্টুরেন্টের খাবার</p>
+    </div>
+
+    <div class="service" data-name="রিকশা অটো ride" onclick="openService('ride')">
+      <div class="icon">🛺</div>
+      <h3>রিকশা / অটো</h3>
+      <p>সহজে যানবাহন খুঁজুন</p>
+    </div>
+
+    <div class="service" data-name="গাড়ি reserve car" onclick="openService('car')">
+      <div class="icon">🚗</div>
+      <h3>গাড়ি রিজার্ভ</h3>
+      <p>প্রয়োজনে গাড়ি বুক করুন</p>
+    </div>
+
+    <div class="service" data-name="কর্মী worker" onclick="openService('worker')">
+      <div class="icon">👷</div>
+      <h3>কর্মী খুঁজুন</h3>
+      <p>বিভিন্ন কাজের কর্মী</p>
+    </div>
+
+    <div class="service" data-name="অন্যান্য other service" onclick="openService('other')">
+      <div class="icon">➕</div>
+      <h3>অন্যান্য সেবা</h3>
+      <p>আরও সেবা দেখুন</p>
+    </div>
+
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+
+    <div class="nav-item" onclick="goHome()">
+      <div class="nav-icon">🏠</div>
+      হোম
+    </div>
+
+    <div class="nav-item active">
+      <div class="nav-icon">🧰</div>
+      সেবা
+    </div>
+
+    <div class="nav-item" onclick="showOrders()">
+      <div class="nav-icon">📦</div>
+      অর্ডার
+    </div>
+
+    <div class="nav-item" onclick="showProfile()">
+      <div class="nav-icon">👤</div>
+      প্রোফাইল
+    </div>
+
+  </nav>
+
+  <script>
+
+    function goHome() {
+      // আপনার Home Page-এর ফাইলের নাম এখানে দিন
+      window.location.href = "index.html";
+    }
+
+    function openService(service) {
+
+      /*
+        পরবর্তী ধাপে প্রতিটি Service-এর
+        আলাদা Page তৈরি করা হবে।
+      */
+
+      if (service === "grocery") {
+        window.location.href = "grocery.html";
+      }
+
+      else if (service === "medicine") {
+        window.location.href = "medicine.html";
+      }
+
+      else if (service === "ride") {
+        window.location.href = "ride.html";
+      }
+
+      else {
+        alert("এই সেবাটি খুব শিগগিরই চালু হবে।");
+      }
+    }
+
+    function searchService() {
+
+      let input =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+      let services =
+        document.querySelectorAll(".service");
+
+      services.forEach(function(service) {
+
+        let name =
+          service.getAttribute("data-name")
+          .toLowerCase();
+
+        if (name.includes(input)) {
+          service.style.display = "block";
+        } else {
+          service.style.display = "none";
+        }
+
+      });
+    }
+
+    function showOrders() {
+      alert("আপনার অর্ডারগুলো এখানে দেখা যাবে।");
+    }
+
+    function showProfile() {
+      alert("Customer Profile খুব শিগগিরই যুক্ত হবে।");
+    }
+
+  </script>
+
+</body>
+</html>
+```
+  
