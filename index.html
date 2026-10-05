@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -8,28 +9,30 @@
 
 <style>
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
     font-family:Arial,"Noto Sans Bengali",sans-serif;
 }
 
 body{
     background:#f5f8f6;
     color:#173b2b;
+    padding-bottom:80px;
 }
 
+/* HEADER */
 .header{
-    background:linear-gradient(135deg,#087443,#0b9b5a);
+    background:linear-gradient(135deg,#056b3b,#0aa45f);
     color:white;
-    padding:18px 16px 25px;
-    border-radius:0 0 25px 25px;
+    padding:18px 16px 22px;
+    border-radius:0 0 28px 28px;
 }
 
 .top{
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
 }
 
 .logo{
@@ -39,8 +42,8 @@ body{
 }
 
 .logo-icon{
-    width:45px;
-    height:45px;
+    width:46px;
+    height:46px;
     background:white;
     color:#087443;
     border-radius:50%;
@@ -55,53 +58,97 @@ body{
 }
 
 .logo p{
-    font-size:12px;
+    font-size:11px;
+    margin-top:3px;
     opacity:.9;
 }
 
 .notification{
+    width:42px;
+    height:42px;
+    border-radius:13px;
     background:rgba(255,255,255,.18);
-    padding:10px;
-    border-radius:12px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:21px;
+}
+
+/* LOCATION */
+.location{
+    margin-top:18px;
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:13px;
+}
+
+/* SEARCH */
+.search{
+    margin-top:15px;
+    background:white;
+    height:48px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    padding:0 14px;
+    gap:10px;
+}
+
+.search span{
     font-size:20px;
 }
 
-.search{
-    margin-top:18px;
-    background:white;
-    border-radius:14px;
-    padding:13px 15px;
-    color:#777;
+.search input{
+    width:100%;
+    border:none;
+    outline:none;
+    font-size:14px;
+    color:#333;
 }
 
+/* BANNER */
 .banner{
-    margin:18px 0;
-    background:#fff;
-    border-radius:18px;
+    margin:18px 15px 0;
     padding:20px;
-    box-shadow:0 3px 12px rgba(0,0,0,.07);
+    border-radius:19px;
+    background:linear-gradient(135deg,#ffffff,#eaf8f0);
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
 }
 
 .banner h2{
     color:#087443;
+    font-size:20px;
     margin-bottom:8px;
 }
 
 .banner p{
-    font-size:14px;
     color:#555;
-    line-height:1.6;
+    font-size:13px;
+    line-height:1.7;
 }
 
+.banner button{
+    margin-top:13px;
+    background:#087443;
+    color:white;
+    border:0;
+    border-radius:10px;
+    padding:10px 17px;
+    font-size:13px;
+}
+
+/* SECTION */
 .section{
     padding:0 15px;
-    margin-top:22px;
+    margin-top:23px;
 }
 
 .section-title{
     display:flex;
     justify-content:space-between;
-    margin-bottom:12px;
+    align-items:center;
+    margin-bottom:13px;
 }
 
 .section-title h3{
@@ -110,9 +157,10 @@ body{
 
 .section-title span{
     color:#087443;
-    font-size:13px;
+    font-size:12px;
 }
 
+/* SERVICE GRID */
 .services{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -121,85 +169,117 @@ body{
 
 .service{
     background:white;
-    border-radius:15px;
-    padding:15px 7px;
+    border:1px solid #e7eee9;
+    border-radius:16px;
+    padding:14px 5px;
     text-align:center;
-    box-shadow:0 2px 8px rgba(0,0,0,.06);
-    border:1px solid #edf2ef;
+    box-shadow:0 2px 7px rgba(0,0,0,.05);
+    cursor:pointer;
+}
+
+.service:active{
+    transform:scale(.95);
 }
 
 .icon{
-    font-size:28px;
-    margin-bottom:8px;
-}
-
-.service p{
-    font-size:12px;
-    color:#333;
-}
-
-.quick{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-}
-
-.quick-card{
-    background:white;
-    padding:16px;
-    border-radius:16px;
-    box-shadow:0 2px 8px rgba(0,0,0,.06);
-}
-
-.quick-card strong{
-    display:block;
-    margin-bottom:5px;
-}
-
-.quick-card small{
-    color:#777;
-}
-
-.ride{
-    margin-top:20px;
-    background:linear-gradient(135deg,#063e29,#087443);
-    color:white;
-    border-radius:18px;
-    padding:18px;
-}
-
-.ride h3{
+    font-size:27px;
     margin-bottom:7px;
 }
 
-.ride button{
-    margin-top:12px;
-    border:0;
+.service h4{
+    font-size:12px;
+    color:#173b2b;
+}
+
+.service p{
+    font-size:10px;
+    color:#777;
+    margin-top:4px;
+}
+
+/* RIDE CARD */
+.ride-card{
+    background:#087443;
+    color:white;
+    border-radius:18px;
+    padding:18px;
+    margin-top:20px;
+}
+
+.ride-card h3{
+    font-size:18px;
+    margin-bottom:7px;
+}
+
+.ride-card p{
+    font-size:12px;
+    line-height:1.6;
+    opacity:.9;
+}
+
+.ride-button{
     background:white;
     color:#087443;
-    padding:10px 18px;
+    border:0;
+    padding:10px 16px;
     border-radius:10px;
+    margin-top:12px;
     font-weight:bold;
 }
 
-.bottom{
+/* QUICK */
+.quick{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.quick-box{
+    background:white;
+    padding:15px;
+    border-radius:15px;
+    border:1px solid #e8eee9;
+}
+
+.quick-box .qicon{
+    font-size:25px;
+}
+
+.quick-box h4{
+    margin-top:7px;
+    font-size:13px;
+}
+
+.quick-box p{
+    margin-top:4px;
+    font-size:10px;
+    color:#777;
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
     position:fixed;
     bottom:0;
     left:0;
     right:0;
-    height:68px;
+    height:67px;
     background:white;
     display:flex;
     justify-content:space-around;
     align-items:center;
-    border-top:1px solid #ddd;
-    box-shadow:0 -3px 10px rgba(0,0,0,.08);
+    box-shadow:0 -3px 15px rgba(0,0,0,.09);
+    z-index:100;
 }
 
 .nav{
     text-align:center;
-    font-size:11px;
     color:#777;
+    font-size:10px;
+}
+
+.nav-icon{
+    font-size:21px;
+    margin-bottom:3px;
 }
 
 .nav.active{
@@ -207,183 +287,366 @@ body{
     font-weight:bold;
 }
 
-.nav div{
-    font-size:22px;
-    margin-bottom:3px;
-}
+/* MOBILE */
+@media(max-width:350px){
 
-.content{
-    padding-bottom:85px;
+    .services{
+        gap:7px;
+    }
+
+    .service{
+        padding:12px 3px;
+    }
+
+    .service h4{
+        font-size:11px;
+    }
+
 }
 </style>
 </head>
 
+
 <body>
 
-<div class="content">
-
+<!-- HEADER -->
 <header class="header">
 
-<div class="top">
+    <div class="top">
 
-<div class="logo">
-<div class="logo-icon">☪</div>
-<div>
-<h2>ইসলামী খিদমাহ</h2>
-<p>সেবাই আমাদের অঙ্গীকার</p>
-</div>
-</div>
+        <div class="logo">
 
-<div class="notification">🔔</div>
+            <div class="logo-icon">
+                ☪
+            </div>
 
-</div>
+            <div>
+                <h2>ইসলামী খিদমাহ</h2>
+                <p>সেবাই আমাদের অঙ্গীকার</p>
+            </div>
 
-<div class="search">
-🔍 &nbsp; আপনি কী সেবা খুঁজছেন?
-</div>
+        </div>
+
+        <div class="notification">
+            🔔
+        </div>
+
+    </div>
+
+
+    <div class="location">
+        📍 <span>আপনার বর্তমান অবস্থান</span>
+    </div>
+
+
+    <div class="search">
+
+        <span>🔍</span>
+
+        <input
+            type="text"
+            placeholder="আপনি কী সেবা চান?"
+        >
+
+    </div>
 
 </header>
 
 
-<div class="section">
+<!-- WELCOME -->
+<section class="banner">
 
-<div class="banner">
-<h2>আসসালামু আলাইকুম 🌿</h2>
-<p>
-আপনার দৈনন্দিন প্রয়োজনের বিভিন্ন সেবা
-এখন এক জায়গায়। সহজে সেবা নিন, নিরাপদে ব্যবহার করুন।
-</p>
-</div>
+    <h2>আসসালামু আলাইকুম 🌿</h2>
 
-</div>
+    <p>
+        আপনার প্রয়োজনীয় বিভিন্ন সেবা এখন
+        ইসলামী খিদমাহ-এর মাধ্যমে সহজেই গ্রহণ করুন।
+    </p>
 
+    <button onclick="openService('সব সেবা')">
+        সব সেবা দেখুন
+    </button>
 
-<div class="section">
-
-<div class="section-title">
-<h3>জনপ্রিয় সেবা</h3>
-<span>সব দেখুন ›</span>
-</div>
-
-<div class="services">
-
-<div class="service">
-<div class="icon">🛒</div>
-<p>বাজার</p>
-</div>
-
-<div class="service">
-<div class="icon">🛺</div>
-<p>রিকশা/অটো</p>
-</div>
-
-<div class="service">
-<div class="icon">🚚</div>
-<p>ডেলিভারি</p>
-</div>
-
-<div class="service">
-<div class="icon">💊</div>
-<p>মেডিসিন</p>
-</div>
-
-<div class="service">
-<div class="icon">🔧</div>
-<p>মিস্ত্রি</p>
-</div>
-
-<div class="service">
-<div class="icon">🏪</div>
-<p>দোকান</p>
-</div>
-
-</div>
-</div>
+</section>
 
 
-<div class="section">
+<!-- SERVICES -->
+<section class="section">
 
-<div class="section-title">
-<h3>দ্রুত সেবা</h3>
-</div>
+    <div class="section-title">
 
-<div class="quick">
+        <h3>জনপ্রিয় সেবা</h3>
 
-<div class="quick-card">
-<strong>📦 অর্ডার করুন</strong>
-<small>বাজার বা পণ্য অর্ডার</small>
-</div>
+        <span onclick="openService('সব সেবা')">
+            সব দেখুন ›
+        </span>
 
-<div class="quick-card">
-<strong>🚕 রাইড নিন</strong>
-<small>কাছের রিকশা/অটো খুঁজুন</small>
-</div>
-
-<div class="quick-card">
-<strong>👨‍🔧 কর্মী খুঁজুন</strong>
-<small>বিশ্বস্ত সেবাদাতা</small>
-</div>
-
-<div class="quick-card">
-<strong>💳 পেমেন্ট</strong>
-<small>Cash ও Online Payment</small>
-</div>
-
-</div>
-
-</div>
+    </div>
 
 
-<div class="section">
-
-<div class="ride">
-
-<h3>🛺 আপনার কাছের রিকশা/অটো</h3>
-
-<p>
-কাছাকাছি থাকা চালক খুঁজে নিয়ে
-আপনার সুবিধামতো রাইডের অনুরোধ করুন।
-</p>
-
-<button onclick="alert('রাইড সিস্টেম শীঘ্রই চালু হবে')">
-রাইড খুঁজুন
-</button>
-
-</div>
-
-</div>
-
-</div>
+    <div class="services">
 
 
-<nav class="bottom">
+        <div class="service"
+             onclick="openService('বাজার')">
 
-<div class="nav active">
-<div>🏠</div>
-হোম
-</div>
+            <div class="icon">🛒</div>
 
-<div class="nav">
-<div>📦</div>
-অর্ডার
-</div>
+            <h4>বাজার</h4>
 
-<div class="nav">
-<div>🛺</div>
-রাইড
-</div>
+            <p>ঘরে বাজার</p>
 
-<div class="nav">
-<div>💳</div>
-পেমেন্ট
-</div>
+        </div>
 
-<div class="nav">
-<div>👤</div>
-প্রোফাইল
-</div>
+
+        <div class="service"
+             onclick="openService('রাইড')">
+
+            <div class="icon">🛺</div>
+
+            <h4>রাইড</h4>
+
+            <p>রিকশা / অটো</p>
+
+        </div>
+
+
+        <div class="service"
+             onclick="openService('খাবার')">
+
+            <div class="icon">🍱</div>
+
+            <h4>খাবার</h4>
+
+            <p>ফুড ডেলিভারি</p>
+
+        </div>
+
+
+        <div class="service"
+             onclick="openService('ওষুধ')">
+
+            <div class="icon">💊</div>
+
+            <h4>ওষুধ</h4>
+
+            <p>মেডিসিন</p>
+
+        </div>
+
+
+        <div class="service"
+             onclick="openService('ইলেকট্রিশিয়ান')">
+
+            <div class="icon">🔧</div>
+
+            <h4>কারিগরি</h4>
+
+            <p>ইলেকট্রিশিয়ান</p>
+
+        </div>
+
+
+        <div class="service"
+             onclick="openService('কর্মী')">
+
+            <div class="icon">👷</div>
+
+            <h4>কর্মী</h4>
+
+            <p>কাজের লোক</p>
+
+        </div>
+
+
+        <div class="service"
+             onclick="openService('গাড়ি')">
+
+            <div class="icon">🚗</div>
+
+            <h4>গাড়ি</h4>
+
+            <p>রিজার্ভ</p>
+
+        </div>
+
+
+        <div class="service"
+             onclick="openService('কেনাবেচা')">
+
+            <div class="icon">🏪</div>
+
+            <h4>কেনাবেচা</h4>
+
+            <p>পণ্য</p>
+
+        </div>
+
+
+        <div class="service"
+             onclick="openService('আরও সেবা')">
+
+            <div class="icon">➕</div>
+
+            <h4>আরও সেবা</h4>
+
+            <p>দেখুন</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RIDE -->
+<section class="section">
+
+    <div class="ride-card">
+
+        <h3>🛺 রিকশা / অটো রাইড</h3>
+
+        <p>
+            আপনার কাছাকাছি থাকা রিকশা ও অটো
+            খুঁজে নিন এবং প্রয়োজন অনুযায়ী রাইড
+            অনুরোধ পাঠান।
+        </p>
+
+        <button
+            class="ride-button"
+            onclick="openService('রাইড')">
+
+            রাইড নিন →
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- QUICK SERVICE -->
+<section class="section">
+
+    <div class="section-title">
+
+        <h3>দ্রুত সেবা</h3>
+
+    </div>
+
+
+    <div class="quick">
+
+
+        <div class="quick-box"
+             onclick="openService('জরুরি সেবা')">
+
+            <div class="qicon">🚨</div>
+
+            <h4>জরুরি সেবা</h4>
+
+            <p>দ্রুত সাহায্য প্রয়োজন?</p>
+
+        </div>
+
+
+        <div class="quick-box"
+             onclick="openService('কাছাকাছি সেবা')">
+
+            <div class="qicon">📍</div>
+
+            <h4>কাছাকাছি সেবা</h4>
+
+            <p>আপনার কাছে কী আছে?</p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom-nav">
+
+
+    <div class="nav active"
+         onclick="goHome()">
+
+        <div class="nav-icon">🏠</div>
+
+        হোম
+
+    </div>
+
+
+    <div class="nav"
+         onclick="openService('অর্ডার')">
+
+        <div class="nav-icon">📦</div>
+
+        অর্ডার
+
+    </div>
+
+
+    <div class="nav"
+         onclick="openService('সেবা')">
+
+        <div class="nav-icon">🛎️</div>
+
+        সেবা
+
+    </div>
+
+
+    <div class="nav"
+         onclick="openService('বার্তা')">
+
+        <div class="nav-icon">💬</div>
+
+        বার্তা
+
+    </div>
+
+
+    <div class="nav"
+         onclick="openService('প্রোফাইল')">
+
+        <div class="nav-icon">👤</div>
+
+        প্রোফাইল
+
+    </div>
+
 
 </nav>
 
+
+<script>
+
+function openService(service){
+
+    alert(
+        "ইসলামী খিদমাহ\n\n" +
+        service +
+        " সেবা নির্বাচন করা হয়েছে।"
+    );
+
+}
+
+function goHome(){
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+</script>
+
 </body>
-    </html>
+</html>
+```
