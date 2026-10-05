@@ -1,0 +1,675 @@
+```html
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>বাজার অর্ডার | ইসলামী খিদমাহ</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, "Noto Sans Bengali", sans-serif;
+    }
+
+    body {
+      background: #f5f8f6;
+      color: #173b2b;
+      padding-bottom: 30px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #087443, #0b9256);
+      color: white;
+      padding: 18px 16px 22px;
+      border-radius: 0 0 25px 25px;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .back {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.16);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 27px;
+      cursor: pointer;
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .subtitle {
+      margin-top: 14px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 15px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 17px;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 13px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #52645b;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #dfe7e2;
+      border-radius: 12px;
+      outline: none;
+      font-size: 14px;
+      background: #fafcfb;
+      margin-bottom: 12px;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #07854b;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .product-row {
+      display: grid;
+      grid-template-columns: 1fr 80px;
+      gap: 8px;
+    }
+
+    .add-btn {
+      width: 100%;
+      border: none;
+      background: #e8f6ee;
+      color: #087443;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .product-list {
+      margin-top: 15px;
+    }
+
+    .product {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f5f8f6;
+      border-radius: 12px;
+      padding: 11px;
+      margin-bottom: 8px;
+    }
+
+    .product-name {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .product-qty {
+      font-size: 12px;
+      color: #777;
+      margin-top: 3px;
+    }
+
+    .delete {
+      border: none;
+      background: #ffecec;
+      color: #d83232;
+      border-radius: 8px;
+      padding: 7px 9px;
+      cursor: pointer;
+    }
+
+    .summary {
+      background: #eef8f2;
+      border-radius: 13px;
+      padding: 13px;
+      margin-top: 10px;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 9px;
+      font-size: 14px;
+    }
+
+    .summary-line:last-child {
+      margin-bottom: 0;
+      font-weight: bold;
+      color: #087443;
+    }
+
+    .order-btn {
+      width: 100%;
+      border: none;
+      background: linear-gradient(135deg, #087443, #0b9256);
+      color: white;
+      padding: 16px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(8,116,67,0.22);
+    }
+
+    .note {
+      text-align: center;
+      font-size: 11px;
+      color: #777;
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    .empty {
+      text-align: center;
+      color: #888;
+      font-size: 13px;
+      padding: 10px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="header">
+
+    <div class="top">
+
+      <div class="back" onclick="goServices()">
+        ‹
+      </div>
+
+      <div class="title">
+        🛒 বাজার অর্ডার
+      </div>
+
+    </div>
+
+    <div class="subtitle">
+      আপনার প্রয়োজনীয় বাজারের তালিকা তৈরি করুন।
+      <br>
+      <b>ইসলামী খিদমাহ — আপনার সেবায়।</b>
+    </div>
+
+  </header>
+
+
+  <main class="container">
+
+
+    <!-- Product Add -->
+    <section class="card">
+
+      <div class="card-title">
+        📝 বাজারের পণ্য যোগ করুন
+      </div>
+
+      <label>
+        পণ্যের নাম
+      </label>
+
+      <div class="product-row">
+
+        <input
+          type="text"
+          id="productName"
+          placeholder="যেমন: চাল, আলু, তেল"
+        >
+
+        <input
+          type="text"
+          id="productQty"
+          placeholder="পরিমাণ"
+        >
+
+      </div>
+
+      <button
+        class="add-btn"
+        onclick="addProduct()"
+      >
+        ＋ পণ্য যোগ করুন
+      </button>
+
+
+      <div
+        class="product-list"
+        id="productList"
+      >
+
+        <div class="empty" id="emptyMessage">
+          এখনো কোনো পণ্য যোগ করা হয়নি।
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Address -->
+    <section class="card">
+
+      <div class="card-title">
+        📍 ডেলিভারি ঠিকানা
+      </div>
+
+      <label>
+        আপনার ঠিকানা
+      </label>
+
+      <textarea
+        id="address"
+        placeholder="বাড়ি/রাস্তা/এলাকা লিখুন"
+      ></textarea>
+
+      <button
+        class="add-btn"
+        onclick="getLocation()"
+      >
+        📍 বর্তমান অবস্থান ব্যবহার করুন
+      </button>
+
+    </section>
+
+
+    <!-- Delivery Time -->
+    <section class="card">
+
+      <div class="card-title">
+        ⏰ ডেলিভারি সময়
+      </div>
+
+      <label>
+        কখন পণ্য পেতে চান?
+      </label>
+
+      <select id="deliveryTime">
+
+        <option value="">
+          সময় নির্বাচন করুন
+        </option>
+
+        <option>
+          যত দ্রুত সম্ভব
+        </option>
+
+        <option>
+          ৩০ মিনিটের মধ্যে
+        </option>
+
+        <option>
+          ১ ঘণ্টার মধ্যে
+        </option>
+
+        <option>
+          ২ ঘণ্টার মধ্যে
+        </option>
+
+        <option>
+          নির্দিষ্ট সময়
+        </option>
+
+      </select>
+
+    </section>
+
+
+    <!-- Budget -->
+    <section class="card">
+
+      <div class="card-title">
+        💰 আনুমানিক বাজেট
+      </div>
+
+      <label>
+        বাজারের আনুমানিক মূল্য
+      </label>
+
+      <input
+        type="number"
+        id="budget"
+        placeholder="যেমন: 1500"
+        oninput="updateBudget()"
+      >
+
+      <div class="summary">
+
+        <div class="summary-line">
+          <span>পণ্যের আনুমানিক মূল্য</span>
+          <span id="productTotal">৳ 0</span>
+        </div>
+
+        <div class="summary-line">
+          <span>ডেলিভারি ফি</span>
+          <span id="deliveryFee">৳ 0</span>
+        </div>
+
+        <div class="summary-line">
+          <span>মোট আনুমানিক</span>
+          <span id="grandTotal">৳ 0</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Extra Note -->
+    <section class="card">
+
+      <div class="card-title">
+        💬 অতিরিক্ত নির্দেশনা
+      </div>
+
+      <textarea
+        id="note"
+        placeholder="কোনো বিশেষ নির্দেশনা থাকলে লিখুন..."
+      ></textarea>
+
+    </section>
+
+
+    <!-- Order -->
+    <section class="card">
+
+      <button
+        class="order-btn"
+        onclick="submitOrder()"
+      >
+        🛒 বাজারের অর্ডার পাঠান
+      </button>
+
+      <div class="note">
+        অর্ডার পাঠানোর পর ইসলামী খিদমাহ-এর সিস্টেম
+        আপনার জন্য ডেলিভারি কর্মী খুঁজবে।
+      </div>
+
+    </section>
+
+  </main>
+
+
+<script>
+
+  let products = [];
+
+
+  /* Add Product */
+
+  function addProduct() {
+
+    const name =
+      document.getElementById("productName").value.trim();
+
+    const qty =
+      document.getElementById("productQty").value.trim();
+
+    if (!name || !qty) {
+
+      alert("পণ্যের নাম ও পরিমাণ লিখুন।");
+
+      return;
+    }
+
+
+    products.push({
+      name: name,
+      qty: qty
+    });
+
+
+    document.getElementById("productName").value = "";
+    document.getElementById("productQty").value = "";
+
+
+    renderProducts();
+  }
+
+
+  /* Show Products */
+
+  function renderProducts() {
+
+    const list =
+      document.getElementById("productList");
+
+    if (products.length === 0) {
+
+      list.innerHTML =
+        '<div class="empty">এখনো কোনো পণ্য যোগ করা হয়নি।</div>';
+
+      return;
+    }
+
+
+    list.innerHTML = "";
+
+
+    products.forEach(function(product, index) {
+
+      const item =
+        document.createElement("div");
+
+      item.className = "product";
+
+
+      item.innerHTML = `
+
+        <div>
+
+          <div class="product-name">
+            ${product.name}
+          </div>
+
+          <div class="product-qty">
+            পরিমাণ: ${product.qty}
+          </div>
+
+        </div>
+
+        <button
+          class="delete"
+          onclick="deleteProduct(${index})"
+        >
+          ✕
+        </button>
+
+      `;
+
+
+      list.appendChild(item);
+
+    });
+
+  }
+
+
+  /* Delete */
+
+  function deleteProduct(index) {
+
+    products.splice(index, 1);
+
+    renderProducts();
+
+  }
+
+
+  /* Budget */
+
+  function updateBudget() {
+
+    const budget =
+      Number(document.getElementById("budget").value) || 0;
+
+
+    /*
+      আপাতত ডেমো হিসেবে
+      ডেলিভারি ফি ৩০ টাকা রাখা হয়েছে।
+      পরবর্তীতে GPS distance অনুযায়ী
+      স্বয়ংক্রিয়ভাবে হিসাব হবে।
+    */
+
+    const deliveryFee =
+      products.length > 0 ? 30 : 0;
+
+
+    document.getElementById("productTotal")
+      .innerText = "৳ " + budget;
+
+
+    document.getElementById("deliveryFee")
+      .innerText = "৳ " + deliveryFee;
+
+
+    document.getElementById("grandTotal")
+      .innerText =
+      "৳ " + (budget + deliveryFee);
+
+  }
+
+
+  /* Location */
+
+  function getLocation() {
+
+    if (!navigator.geolocation) {
+
+      alert("আপনার ফোনে Location সুবিধা পাওয়া যাচ্ছে না।");
+
+      return;
+    }
+
+
+    navigator.geolocation.getCurrentPosition(
+
+      function(position) {
+
+        const lat =
+          position.coords.latitude;
+
+        const lon =
+          position.coords.longitude;
+
+
+        document.getElementById("address").value =
+          "বর্তমান অবস্থান পাওয়া গেছে\n" +
+          "Latitude: " + lat +
+          "\nLongitude: " + lon;
+
+      },
+
+      function() {
+
+        alert(
+          "Location ব্যবহার করতে আপনার Browser-এ Location Permission দিন।"
+        );
+
+      }
+
+    );
+
+  }
+
+
+  /* Submit */
+
+  function submitOrder() {
+
+    const address =
+      document.getElementById("address").value.trim();
+
+    const deliveryTime =
+      document.getElementById("deliveryTime").value;
+
+
+    if (products.length === 0) {
+
+      alert("কমপক্ষে একটি পণ্য যোগ করুন।");
+
+      return;
+    }
+
+
+    if (!address) {
+
+      alert("ডেলিভারি ঠিকানা লিখুন।");
+
+      return;
+    }
+
+
+    if (!deliveryTime) {
+
+      alert("ডেলিভারি সময় নির্বাচন করুন।");
+
+      return;
+    }
+
+
+    alert(
+      "✅ আপনার বাজারের অর্ডার সফলভাবে প্রস্তুত হয়েছে!\n\n" +
+      "পরবর্তী ধাপে Delivery Worker নির্বাচন ও Order Tracking যুক্ত করা হবে।"
+    );
+
+  }
+
+
+  /* Back */
+
+  function goServices() {
+
+    window.location.href =
+      "services.html";
+
+  }
+
+</script>
+
+</body>
+</html>
+```
+  
