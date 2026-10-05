@@ -72,7 +72,7 @@ input{
   padding:14px;
   border:1px solid #d7e2db;
   border-radius:12px;
-  font-size:15px;
+  font-size:16px;
   outline:none;
 }
 
@@ -97,7 +97,8 @@ button:disabled{
 }
 
 #recaptcha-container{
-  margin-top:12px;
+  margin-top:15px;
+  min-height:80px;
 }
 
 #otpSection{
@@ -105,7 +106,6 @@ button:disabled{
 }
 
 .message{
-  display:none;
   margin-top:15px;
   padding:13px;
   border-radius:10px;
@@ -152,8 +152,6 @@ button:disabled{
     Customer Account তৈরি করতে মোবাইল নম্বর ব্যবহার করুন
   </p>
 
-  <!-- Phone -->
-
   <div id="phoneSection">
 
     <label>📱 মোবাইল নম্বর</label>
@@ -168,17 +166,11 @@ button:disabled{
 
     <div id="recaptcha-container"></div>
 
-    <button
-      id="sendBtn"
-      type="button"
-    >
+    <button id="sendBtn" type="button">
       OTP পাঠান
     </button>
 
   </div>
-
-
-  <!-- OTP -->
 
   <div id="otpSection">
 
@@ -192,21 +184,13 @@ button:disabled{
       inputmode="numeric"
     >
 
-    <button
-      id="verifyBtn"
-      type="button"
-    >
+    <button id="verifyBtn" type="button">
       Verify করে Login করুন
     </button>
 
   </div>
 
-
-  <div
-    id="message"
-    class="message"
-  ></div>
-
+  <div id="message"></div>
 
   <a href="index.html" class="back">
     ← Home Page
@@ -229,45 +213,47 @@ let confirmationResult = null;
 let recaptchaVerifier = null;
 
 
-/* =========================
-   MESSAGE
-========================= */
+/* MESSAGE */
 
 function showMessage(text,type){
 
-  const box =
-    document.getElementById("message");
+  const box = document.getElementById("message");
 
   box.innerText = text;
 
-  box.className =
-    "message " + type;
+  box.className = "message " + type;
 
-  box.style.display = "block";
 }
 
 
-/* =========================
-   RECAPTCHA
-========================= */
+/* START RECAPTCHA */
 
-function setupRecaptcha(){
+async function startRecaptcha(){
 
-  if(recaptchaVerifier){
-    return;
-  }
+  try{
 
-  recaptchaVerifier =
-    new RecaptchaVerifier(
+    showMessage(
+      "⏳ নিরাপত্তা যাচাই চালু হচ্ছে...",
+      "loading"
+    );
+
+    if(recaptchaVerifier){
+
+      return;
+
+    }
+
+    recaptchaVerifier = new RecaptchaVerifier(
       auth,
       "recaptcha-container",
       {
+
         size:"normal",
 
         callback:function(){
 
           showMessage(
-            "✅ Verification সম্পন্ন হয়েছে। এখন OTP পাঠাতে চাপুন।",
+            "✅ নিরাপত্তা যাচাই সম্পন্ন হয়েছে। এখন OTP পাঠান চাপুন।",
             "success"
           );
 
@@ -276,7 +262,7 @@ function setupRecaptcha(){
         "expired-callback":function(){
 
           showMessage(
-            "reCAPTCHA-এর সময় শেষ হয়েছে। আবার চেষ্টা করুন।",
+            "⚠️ নিরাপত্তা যাচাইয়ের সময় শেষ হয়েছে। আবার চেষ্টা করুন।",
             "error"
           );
 
@@ -285,259 +271,287 @@ function setupRecaptcha(){
       }
     );
 
-}
-
-
-/* =========================
-   SEND OTP
-========================= */
-
-document
-.getElementById("sendBtn")
-.addEventListener("click", async function(){
-
-  const phoneInput =
-    document.getElementById("phone");
-
-  const sendBtn =
-    document.getElementById("sendBtn");
-
-  let phone =
-    phoneInput.value.trim();
-
-
-  /* Bangladesh number check */
-
-  if(!/^01[3-9]\d{8}$/.test(phone)){
+    await recaptchaVerifier.render();
 
     showMessage(
-      "সঠিক বাংলাদেশি মোবাইল নম্বর দিন।\nউদাহরণ: 01712345678",
-      "error"
-    );
-
-    return;
-  }
-
-
-  let fullPhone =
-    "+88" + phone;
-
-
-  sendBtn.disabled = true;
-
-  showMessage(
-    "⏳ Firebase-এর মাধ্যমে OTP পাঠানো হচ্ছে...",
-    "loading"
-  );
-
-
-  try{
-
-    setupRecaptcha();
-
-
-    confirmationResult =
-      await signInWithPhoneNumber(
-        auth,
-        fullPhone,
-        recaptchaVerifier
-      );
-
-
-    document
-      .getElementById("otpSection")
-      .style.display = "block";
-
-
-    showMessage(
-      "✅ OTP পাঠানো হয়েছে।\nআপনার SMS থেকে ৬ সংখ্যার OTP দিন।",
+      "✅ নিরাপত্তা যাচাই প্রস্তুত।",
       "success"
     );
 
-
   }catch(error){
 
-    console.error(
-      "Firebase Phone Auth Error:",
-      error
-    );
-
-
-    sendBtn.disabled = false;
-
-
-    let errorText =
-      "❌ OTP পাঠানো যায়নি।\n\n";
-
-
-    if(error.code){
-
-      errorText +=
-        "Error Code: " +
-        error.code +
-        "\n\n";
-    }
-
-
-    if(error.message){
-
-      errorText +=
-        error.message;
-    }
-
+    console.error(error);
 
     showMessage(
-      errorText,
-      "error"
-    );
-
-
-    /* Reset reCAPTCHA */
-
-    try{
-
-      if(recaptchaVerifier){
-
-        recaptchaVerifier.clear();
-
-        recaptchaVerifier = null;
-
-      }
-
-      document
-        .getElementById(
-          "recaptcha-container"
-        )
-        .innerHTML = "";
-
-      setupRecaptcha();
-
-    }catch(e){
-
-      console.log(e);
-
-    }
-
-  }
-
-});
-
-
-/* =========================
-   VERIFY OTP
-========================= */
-
-document
-.getElementById("verifyBtn")
-.addEventListener("click", async function(){
-
-  const otp =
-    document
-      .getElementById("otp")
-      .value
-      .trim();
-
-
-  if(!/^\d{6}$/.test(otp)){
-
-    showMessage(
-      "৬ সংখ্যার OTP দিন।",
-      "error"
-    );
-
-    return;
-  }
-
-
-  if(!confirmationResult){
-
-    showMessage(
-      "আগে OTP পাঠান।",
-      "error"
-    );
-
-    return;
-  }
-
-
-  const verifyBtn =
-    document.getElementById("verifyBtn");
-
-  verifyBtn.disabled = true;
-
-
-  showMessage(
-    "⏳ OTP যাচাই করা হচ্ছে...",
-    "loading"
-  );
-
-
-  try{
-
-    const result =
-      await confirmationResult.confirm(otp);
-
-
-    const user =
-      result.user;
-
-
-    /* Save basic login information */
-
-    localStorage.setItem(
-      "customer_uid",
-      user.uid
-    );
-
-
-    localStorage.setItem(
-      "customer_phone",
-      user.phoneNumber || ""
-    );
-
-
-    showMessage(
-      "✅ Login সফল হয়েছে!\nCustomer Home Page খোলা হচ্ছে...",
-      "success"
-    );
-
-
-    setTimeout(function(){
-
-      window.location.href =
-        "index.html";
-
-    },1200);
-
-
-  }catch(error){
-
-    console.error(
-      "OTP Verification Error:",
-      error
-    );
-
-
-    verifyBtn.disabled = false;
-
-
-    showMessage(
-      "❌ OTP যাচাই করা যায়নি।\n\n" +
+      "❌ reCAPTCHA চালু হয়নি।\n\n" +
       "Error Code: " +
       (error.code || "unknown") +
       "\n\n" +
-      (error.message || ""),
+      (error.message || error),
       "error"
     );
 
   }
 
-});
+}
 
 
-/* Start reCAPTCHA */
+/* PAGE LOAD */
 
-setupRecaptcha();
+startRecaptcha();
+
+
+/* SEND OTP */
+
+document.getElementById("sendBtn").addEventListener(
+  "click",
+  async function(){
+
+    const sendBtn =
+      document.getElementById("sendBtn");
+
+    const phoneInput =
+      document.getElementById("phone");
+
+    let phone =
+      phoneInput.value.trim();
+
+
+    /* NUMBER CHECK */
+
+    if(!/^01[3-9]\d{8}$/.test(phone)){
+
+      showMessage(
+        "❌ সঠিক বাংলাদেশি মোবাইল নম্বর দিন।\n\nউদাহরণ: 01712345678",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    sendBtn.disabled = true;
+
+    showMessage(
+      "⏳ OTP পাঠানোর প্রস্তুতি চলছে...",
+      "loading"
+    );
+
+
+    try{
+
+      /* RECAPTCHA না থাকলে আবার তৈরি */
+
+      if(!recaptchaVerifier){
+
+        await startRecaptcha();
+
+      }
+
+
+      /* BANGLADESH COUNTRY CODE */
+
+      const fullPhone =
+        "+88" + phone;
+
+
+      showMessage(
+        "⏳ Firebase-এ OTP request পাঠানো হচ্ছে...\n\nনম্বর: " +
+        fullPhone,
+        "loading"
+      );
+
+
+      confirmationResult =
+        await signInWithPhoneNumber(
+          auth,
+          fullPhone,
+          recaptchaVerifier
+        );
+
+
+      document.getElementById(
+        "otpSection"
+      ).style.display = "block";
+
+
+      showMessage(
+        "✅ OTP পাঠানো হয়েছে!\n\n" +
+        "আপনার মোবাইলের SMS দেখুন।",
+        "success"
+      );
+
+
+    }catch(error){
+
+      console.error(
+        "PHONE AUTH ERROR:",
+        error
+      );
+
+      sendBtn.disabled = false;
+
+
+      let msg =
+        "❌ OTP পাঠানো যায়নি।\n\n";
+
+
+      msg +=
+        "Error Code: " +
+        (error.code || "unknown") +
+        "\n\n";
+
+
+      msg +=
+        error.message ||
+        "Unknown error";
+
+
+      showMessage(
+        msg,
+        "error"
+      );
+
+
+      /* নতুন reCAPTCHA */
+
+      try{
+
+        if(recaptchaVerifier){
+
+          recaptchaVerifier.clear();
+
+        }
+
+        recaptchaVerifier = null;
+
+        document.getElementById(
+          "recaptcha-container"
+        ).innerHTML = "";
+
+        await startRecaptcha();
+
+      }catch(e){
+
+        console.error(e);
+
+      }
+
+    }
+
+  }
+);
+
+
+/* VERIFY OTP */
+
+document.getElementById(
+  "verifyBtn"
+).addEventListener(
+  "click",
+  async function(){
+
+    const otp =
+      document.getElementById(
+        "otp"
+      ).value.trim();
+
+
+    if(!/^\d{6}$/.test(otp)){
+
+      showMessage(
+        "❌ ৬ সংখ্যার OTP দিন।",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if(!confirmationResult){
+
+      showMessage(
+        "❌ আগে OTP পাঠাতে হবে।",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const verifyBtn =
+      document.getElementById(
+        "verifyBtn"
+      );
+
+    verifyBtn.disabled = true;
+
+
+    showMessage(
+      "⏳ OTP যাচাই করা হচ্ছে...",
+      "loading"
+    );
+
+
+    try{
+
+      const result =
+        await confirmationResult.confirm(otp);
+
+
+      const user =
+        result.user;
+
+
+      localStorage.setItem(
+        "customer_uid",
+        user.uid
+      );
+
+
+      localStorage.setItem(
+        "customer_phone",
+        user.phoneNumber || ""
+      );
+
+
+      showMessage(
+        "✅ Login সফল হয়েছে!\n\nCustomer Home Page খোলা হচ্ছে...",
+        "success"
+      );
+
+
+      setTimeout(function(){
+
+        window.location.href =
+          "index.html";
+
+      },1200);
+
+
+    }catch(error){
+
+      console.error(error);
+
+      verifyBtn.disabled = false;
+
+
+      showMessage(
+        "❌ OTP ভুল অথবা যাচাই করা যায়নি।\n\n" +
+        "Error Code: " +
+        (error.code || "unknown") +
+        "\n\n" +
+        (error.message || ""),
+        "error"
+      );
+
+    }
+
+  }
+);
 
 </script>
 
