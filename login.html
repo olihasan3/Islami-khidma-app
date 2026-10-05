@@ -1,11 +1,10 @@
-```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>লগইন | ইসলামী খিদমাহ</title>
+<title>Customer Login - ইসলামী খিদমাহ</title>
 
 <style>
 *{
@@ -22,60 +21,59 @@ body{
   align-items:center;
   justify-content:center;
   padding:20px;
-  color:#173b2a;
 }
 
 .box{
   width:100%;
   max-width:430px;
   background:white;
-  border-radius:22px;
   padding:25px 20px;
-  box-shadow:0 5px 25px #00000012;
+  border-radius:22px;
+  box-shadow:0 5px 25px #00000015;
 }
 
 .logo{
   width:75px;
   height:75px;
-  border-radius:50%;
   background:#087443;
   color:white;
+  border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   margin:0 auto 15px;
-  font-size:36px;
+  font-size:35px;
 }
 
 h1{
   text-align:center;
-  font-size:23px;
   color:#087443;
+  font-size:23px;
 }
 
 .subtitle{
   text-align:center;
-  margin-top:7px;
   color:#777;
   font-size:13px;
   line-height:1.6;
+  margin-top:7px;
 }
 
 label{
   display:block;
-  margin-top:18px;
-  margin-bottom:7px;
-  font-size:14px;
   font-weight:bold;
+  font-size:14px;
+  margin-top:20px;
+  margin-bottom:7px;
 }
 
 input{
   width:100%;
   padding:14px;
-  border:1px solid #dce5df;
+  border:1px solid #d7e2db;
   border-radius:12px;
-  outline:none;
   font-size:15px;
+  outline:none;
 }
 
 input:focus{
@@ -84,38 +82,51 @@ input:focus{
 
 button{
   width:100%;
-  border:none;
   padding:14px;
+  border:none;
   border-radius:12px;
   background:#087443;
   color:white;
   font-size:15px;
   font-weight:bold;
   margin-top:18px;
-  cursor:pointer;
 }
 
 button:disabled{
   opacity:.6;
 }
 
-.otp{
+#recaptcha-container{
+  margin-top:12px;
+}
+
+#otpSection{
   display:none;
 }
 
 .message{
-  margin-top:14px;
-  padding:12px;
+  display:none;
+  margin-top:15px;
+  padding:13px;
   border-radius:10px;
-  background:#eef8f2;
-  color:#087443;
   font-size:13px;
   line-height:1.6;
-  display:none;
+  white-space:pre-wrap;
 }
 
-.recaptcha{
-  margin-top:10px;
+.success{
+  background:#e5f7eb;
+  color:#075d35;
+}
+
+.error{
+  background:#ffe8e8;
+  color:#a00000;
+}
+
+.loading{
+  background:#fff5d9;
+  color:#765500;
 }
 
 .back{
@@ -133,40 +144,33 @@ button:disabled{
 
 <div class="box">
 
-  <div class="logo">
-    ☪
-  </div>
+  <div class="logo">☪</div>
 
   <h1>ইসলামী খিদমাহ</h1>
 
   <p class="subtitle">
-    আপনার মোবাইল নম্বর দিয়ে Customer Account তৈরি করুন
-    অথবা Login করুন।
+    Customer Account তৈরি করতে মোবাইল নম্বর ব্যবহার করুন
   </p>
 
-
-  <!-- PHONE -->
+  <!-- Phone -->
 
   <div id="phoneSection">
 
-    <label>
-      📱 মোবাইল নম্বর
-    </label>
+    <label>📱 মোবাইল নম্বর</label>
 
     <input
       type="tel"
       id="phone"
       placeholder="01XXXXXXXXX"
       maxlength="11"
+      inputmode="numeric"
     >
 
-    <div id="recaptcha-container"
-         class="recaptcha">
-    </div>
+    <div id="recaptcha-container"></div>
 
     <button
       id="sendBtn"
-      onclick="sendOTP()"
+      type="button"
     >
       OTP পাঠান
     </button>
@@ -176,24 +180,21 @@ button:disabled{
 
   <!-- OTP -->
 
-  <div
-    id="otpSection"
-    class="otp"
-  >
+  <div id="otpSection">
 
-    <label>
-      🔐 OTP কোড
-    </label>
+    <label>🔐 OTP কোড</label>
 
     <input
-      type="number"
+      type="text"
       id="otp"
       placeholder="৬ সংখ্যার OTP"
       maxlength="6"
+      inputmode="numeric"
     >
 
     <button
-      onclick="verifyOTP()"
+      id="verifyBtn"
+      type="button"
     >
       Verify করে Login করুন
     </button>
@@ -207,10 +208,7 @@ button:disabled{
   ></div>
 
 
-  <a
-    href="index.html"
-    class="back"
-  >
+  <a href="index.html" class="back">
     ← Home Page
   </a>
 
@@ -227,117 +225,251 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
 
-let confirmationResult;
+let confirmationResult = null;
+let recaptchaVerifier = null;
 
 
-/* Message */
+/* =========================
+   MESSAGE
+========================= */
 
-function showMessage(text){
+function showMessage(text,type){
 
-  const message =
+  const box =
     document.getElementById("message");
 
-  message.innerText = text;
+  box.innerText = text;
 
-  message.style.display = "block";
+  box.className =
+    "message " + type;
+
+  box.style.display = "block";
 }
 
 
-/* reCAPTCHA */
+/* =========================
+   RECAPTCHA
+========================= */
 
-window.recaptchaVerifier =
-  new RecaptchaVerifier(
-    auth,
-    "recaptcha-container",
-    {
-      size:"normal"
-    }
-  );
+function setupRecaptcha(){
+
+  if(recaptchaVerifier){
+    return;
+  }
+
+  recaptchaVerifier =
+    new RecaptchaVerifier(
+      auth,
+      "recaptcha-container",
+      {
+        size:"normal",
+
+        callback:function(){
+
+          showMessage(
+            "✅ Verification সম্পন্ন হয়েছে। এখন OTP পাঠাতে চাপুন।",
+            "success"
+          );
+
+        },
+
+        "expired-callback":function(){
+
+          showMessage(
+            "reCAPTCHA-এর সময় শেষ হয়েছে। আবার চেষ্টা করুন।",
+            "error"
+          );
+
+        }
+
+      }
+    );
+
+}
 
 
-/* Send OTP */
+/* =========================
+   SEND OTP
+========================= */
 
-window.sendOTP = async function(){
+document
+.getElementById("sendBtn")
+.addEventListener("click", async function(){
+
+  const phoneInput =
+    document.getElementById("phone");
+
+  const sendBtn =
+    document.getElementById("sendBtn");
 
   let phone =
-    document.getElementById("phone").value.trim();
+    phoneInput.value.trim();
 
 
-  if(phone.length !== 11 ||
-     !phone.startsWith("01")){
+  /* Bangladesh number check */
+
+  if(!/^01[3-9]\d{8}$/.test(phone)){
 
     showMessage(
-      "দয়া করে সঠিক ১১ সংখ্যার বাংলাদেশি মোবাইল নম্বর দিন।"
+      "সঠিক বাংলাদেশি মোবাইল নম্বর দিন।\nউদাহরণ: 01712345678",
+      "error"
     );
 
     return;
   }
 
 
-  let internationalPhone =
+  let fullPhone =
     "+88" + phone;
 
-
-  const sendBtn =
-    document.getElementById("sendBtn");
 
   sendBtn.disabled = true;
 
   showMessage(
-    "OTP পাঠানো হচ্ছে..."
+    "⏳ Firebase-এর মাধ্যমে OTP পাঠানো হচ্ছে...",
+    "loading"
   );
 
 
   try{
 
+    setupRecaptcha();
+
+
     confirmationResult =
       await signInWithPhoneNumber(
         auth,
-        internationalPhone,
-        window.recaptchaVerifier
+        fullPhone,
+        recaptchaVerifier
       );
 
 
-    document.getElementById("otpSection")
+    document
+      .getElementById("otpSection")
       .style.display = "block";
 
 
     showMessage(
-      "✅ OTP পাঠানো হয়েছে। আপনার মোবাইলে পাওয়া ৬ সংখ্যার OTP দিন।"
+      "✅ OTP পাঠানো হয়েছে।\nআপনার SMS থেকে ৬ সংখ্যার OTP দিন।",
+      "success"
     );
 
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "Firebase Phone Auth Error:",
+      error
+    );
+
 
     sendBtn.disabled = false;
 
+
+    let errorText =
+      "❌ OTP পাঠানো যায়নি।\n\n";
+
+
+    if(error.code){
+
+      errorText +=
+        "Error Code: " +
+        error.code +
+        "\n\n";
+    }
+
+
+    if(error.message){
+
+      errorText +=
+        error.message;
+    }
+
+
     showMessage(
-      "❌ OTP পাঠানো যায়নি। নম্বর ও Firebase Phone Authentication সেটিংস পরীক্ষা করুন।"
+      errorText,
+      "error"
     );
+
+
+    /* Reset reCAPTCHA */
+
+    try{
+
+      if(recaptchaVerifier){
+
+        recaptchaVerifier.clear();
+
+        recaptchaVerifier = null;
+
+      }
+
+      document
+        .getElementById(
+          "recaptcha-container"
+        )
+        .innerHTML = "";
+
+      setupRecaptcha();
+
+    }catch(e){
+
+      console.log(e);
+
+    }
 
   }
 
-};
+});
 
 
-/* Verify OTP */
+/* =========================
+   VERIFY OTP
+========================= */
 
-window.verifyOTP = async function(){
+document
+.getElementById("verifyBtn")
+.addEventListener("click", async function(){
 
   const otp =
-    document.getElementById("otp").value.trim();
+    document
+      .getElementById("otp")
+      .value
+      .trim();
 
 
-  if(otp.length !== 6){
+  if(!/^\d{6}$/.test(otp)){
 
     showMessage(
-      "দয়া করে ৬ সংখ্যার OTP দিন।"
+      "৬ সংখ্যার OTP দিন।",
+      "error"
     );
 
     return;
   }
+
+
+  if(!confirmationResult){
+
+    showMessage(
+      "আগে OTP পাঠান।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const verifyBtn =
+    document.getElementById("verifyBtn");
+
+  verifyBtn.disabled = true;
+
+
+  showMessage(
+    "⏳ OTP যাচাই করা হচ্ছে...",
+    "loading"
+  );
 
 
   try{
@@ -346,8 +478,11 @@ window.verifyOTP = async function(){
       await confirmationResult.confirm(otp);
 
 
-    const user = result.user;
+    const user =
+      result.user;
 
+
+    /* Save basic login information */
 
     localStorage.setItem(
       "customer_uid",
@@ -357,12 +492,13 @@ window.verifyOTP = async function(){
 
     localStorage.setItem(
       "customer_phone",
-      user.phoneNumber
+      user.phoneNumber || ""
     );
 
 
     showMessage(
-      "✅ Login সফল হয়েছে। Customer Home খুলছে..."
+      "✅ Login সফল হয়েছে!\nCustomer Home Page খোলা হচ্ছে...",
+      "success"
     );
 
 
@@ -376,19 +512,34 @@ window.verifyOTP = async function(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "OTP Verification Error:",
+      error
+    );
+
+
+    verifyBtn.disabled = false;
+
 
     showMessage(
-      "❌ OTP সঠিক নয় অথবা OTP-এর মেয়াদ শেষ হয়েছে।"
+      "❌ OTP যাচাই করা যায়নি।\n\n" +
+      "Error Code: " +
+      (error.code || "unknown") +
+      "\n\n" +
+      (error.message || ""),
+      "error"
     );
 
   }
 
-};
+});
+
+
+/* Start reCAPTCHA */
+
+setupRecaptcha();
 
 </script>
 
 </body>
-</html>
-```
-  
+  </html>
